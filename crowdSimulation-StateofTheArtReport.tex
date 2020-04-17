@@ -91,7 +91,7 @@
 
 \author{Bernhard Kerbl}
 \affiliation{
-	\institution{Institute of Visual Computing & Human-Centered Technology, Technical University Vienna}
+	\institution{Institute of Visual Computing \& Human-Centered Technology, Technical University Vienna}
 }
 \authornote{Advisor}
 \email{kerbl@cg.tuwien.ac.at}
@@ -108,9 +108,9 @@
 %% The abstract is a short summary of the work to be presented in the
 %% article.
 \begin{abstract}
-The goal of this state of the art report is to give a quick overview of the topic. Reader should be able to understand what application areas and research areas are covered, important key concepts and technical terms often used in the field. As crowd simulation is a broad field it is not possible to cover all approaches to a given problem, so often there are additional references for further detailed reading. 
+The goal of this state of the art report is to give a quick overview of the topic. Reader should be able to understand what application areas and research areas are covered, important key concepts and technical terms often used in the field. As crowd simulation is a broad field it is not possible to cover all approaches to a given problem, so there are additional references for further detailed reading. 
 
-In the Introduction key areas, common definitions and terms as well as first research results done in the field are explained. The Report continues with common application areas and an overview of the research areas and the problem these try to solve. After that each area is described in more detail with given common approaches. At the end there is a outlook for future research necessary in crowd simulation. 
+In the Introduction key areas, common definitions and terms as well as first research results done in the field are explained. The Report continues with common application areas and an overview of the research areas and the problem these try to solve. After that each area is described in more detail with given approaches. At the end there is a outlook for future research necessary in crowd simulation. 
 \end{abstract}
 
 %%
@@ -188,8 +188,22 @@ In the Introduction key areas, common definitions and terms as well as first res
 
 \section{Introduction}
 
-TESTZITAT
-\cite{reynolds_flocks_1987}
+A good comprehensive work on crowd simulation is the book "Crowd Simulation" \cite{thalmann_crowd_2013} in the introduction part I will sum up some key aspects. 
+
+At the beginning some information for the research field in general. The research results in crowd simulation does not come from one or two specific scientific fields or communities, rather the results is a combination of many different fields. A big part comes from the computer graphics field but there is also research done in architecture, physics, robotics, safety science, sociology and so on(TODO: zitat zu werken von den bereichen). A resulting problem is that it is difficult to keep up to date with the current research and because each science field uses different publication methods it is especially easy to overlook some papers on different fields and miss usefully information for the own research. In addition most papers are presenting an solution to a specific problem, for example a pedestrian simulation in real time \cite{karamouzas_predictive_2009},which is not very useful when you want to simulate a big fighting scene in a movie.
+
+
+\subsection{Key areas}
+
+For a believable crowd simulation there are two parts. First we need to have \textbf{"behavioral animation and environment modeling"}\cite{thalmann_crowd_2013} which defines how the crowd is moving and reacting to each other and the environment. Some example research topic here for example are "Flocks, herds and schools: A distributed behavioral model"\cite{reynolds_flocks_1987} or "Social force model for pedestrian dynamics"\cite{helbing_social_1995}. Second we also need \textbf{"crowd rendering"}\cite{thalmann_crowd_2013} for displaying the large amount of agents in the crowd, where performance is especially important in real time simulations. Crowd rendering also researches the level of detail we are rending, a evacuation simulation could use points or a simple 3D model of a person on the other hand a simulation for movies or games would need more details. Here some examples would be "TODO".
+
+Most application on crowd simulation focus on one of two key areas: 
+\begin{itemize}
+\item \textbf{"Realism of behavioural Simulation"}\cite{thalmann_crowd_2013} keywords: crowd dynamic, evacuation simulation, social models, collision avoidance and evaluation of results to the real world
+\item \textbf{"High quality rendering"}\cite{thalmann_crowd_2013} keywords: crowds in movies and games, performance optimization, combination with motion capturing and physics simulation  
+\end{itemize}
+
+\cite{thalmann_crowd_2013}
 
 %%
 %% The acknowledgments section is defined using the "acks" environment
