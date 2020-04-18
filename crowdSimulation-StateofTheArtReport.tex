@@ -195,7 +195,7 @@ At the beginning some information for the research field in general. The researc
 
 \subsection{Key areas}
 
-For a believable crowd simulation there are two parts. First we need to have \textbf{"behavioral animation and environment modeling"}\cite{thalmann_crowd_2013} which defines how the crowd is moving and reacting to each other and the environment. Some example research topic here for example are "Flocks, herds and schools: A distributed behavioral model"\cite{reynolds_flocks_1987} or "Social force model for pedestrian dynamics"\cite{helbing_social_1995}. Second we also need \textbf{"crowd rendering"}\cite{thalmann_crowd_2013} for displaying the large amount of agents in the crowd, where performance is especially important in real time simulations. Crowd rendering also researches the level of detail we are rending, a evacuation simulation could use points or a simple 3D model of a person on the other hand a simulation for movies or games would need more details. Here some examples would be "TODO".
+For a believable crowd simulation there are two parts. First we need to have \textbf{"behavioral animation and environment modeling"}\cite{thalmann_crowd_2013} which defines how the crowd is moving and reacting to each other and the environment. Some example research topic here are for example "Flocks, herds and schools: A distributed behavioral model"\cite{reynolds_flocks_1987} or "Social force model for pedestrian dynamics"\cite{helbing_social_1995}. Second we also need \textbf{"crowd rendering"}\cite{thalmann_crowd_2013} for displaying the large amount of agents in the crowd, where performance is especially important in real time simulations. Crowd rendering also researches the level of detail we are rending, a evacuation simulation could use points or a simple 3D model of a person on the other hand a simulation for movies or games would need more details. Here some examples would be "TODO".
 
 Most application on crowd simulation focus on one of two key areas: 
 \begin{itemize}
@@ -203,7 +203,22 @@ Most application on crowd simulation focus on one of two key areas:
 \item \textbf{"High quality rendering"}\cite{thalmann_crowd_2013} keywords: crowds in movies and games, performance optimization, combination with motion capturing and physics simulation  
 \end{itemize}
 
+
 \cite{thalmann_crowd_2013}
+
+\subsection{Simulation Models}
+
+To simulate realistic crowd behavior a model is needed which specifies how the crowd reacts in each simulation step. The used models can be classified in roughly two groups macroscopic and microscopic models. The difference is how they see an agent in a crowd. An \textbf{agent} is a single actor in a crowd simulation which can move and act independently from other agents, this can be a human in a crowd of people but also a car in a traffic simulation. However on some applications and paper especially those who handle real time simulations agents are grouped to reduce the simulation cost and only rendered as multiple agents / persons, an example are the "TotalWar" \cite{total_war_website} \cite{thalmann_crowd_2013} game series.
+
+\subsubsection{\textbf{macroscopic models}}
+These types of models try to simulate the crowd as an whole unit, they are often used in a real-time scenario because the number of individual agents in the crowd does not highly affect performance in the simulation. In some papers they are also referred as "continuum-based"\cite{xu_crowd_2014}. The goal here is that the crowd as a whole reacts realistically. These simulation can be compared to gas or fluid simulations, because there is not each particle or in our case each agent simulated moreover there is a common path for the fluid or whole crowd simulated. An example are the pedestrian and crowd simulation papers from Hudges \cite{hughes_continuum_2002} \cite{hughes_flow_2003}
+
+\subsubsection{\textbf{microscopic models}}
+On the other hand microscopic models, also referred as "agent-based"\cite{xu_crowd_2014} try to simulate each single agent. The resulting simulation often brings better results than a simulation with a macroscopic model but it also costs more performance, so it is not suitable for simulating large crowds in real time. Most approaches define rules for each agent how to react to the environment and different scenarios. There is a lot of different papers and approaches which rules and attributes provide what results. A common used approach is force-based, famous cited papers are "Social force model for pedestrian dynamics" \cite{helbing_social_1995} and "Flocks, herds and schools: A distributed behavioral model" \cite{reynolds_flocks_1987}. TODO: insert other paper references from xu crowd 2014 2.2 .A often resulting problem is that "agents appear to shake or vibrate in high-density crowds"\cite{xu_crowd_2014}
+
+\cite{xu_crowd_2014}\cite{thalmann_crowd_2013}
+
+\subsection{NEXT}
 
 %%
 %% The acknowledgments section is defined using the "acks" environment
