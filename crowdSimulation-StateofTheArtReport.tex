@@ -261,7 +261,20 @@ In the paper all effects are described in detail with mathematically equations, 
 \end{quote}
 This behaviour can also be observed in real world scenarios. 
 
-\subsubsection{Simulating dynamical features of escape panic}\cite{helbing_simulating_2000} on the other hand there is also a need for simulating pedestrians in a panic situation, a common example are evacuation simulations (TODO: link papers applicaitons etc)
+\subsubsection{Simulating dynamical features of escape panic}\cite{helbing_simulating_2000} on the other hand there is also a need for simulating pedestrians in a panic situation, a common example are evacuation simulations (TODO: link papers applications etc). 
+There are a number of reasons for a panic reaction in a crowd, unexpected actions like an loud gun shot or a fire are a common reasons most people would think about. But also expected situations like the race for a limited amount of resources (tickets, seats, toilet paper in the corona crisis)  and situations without any cause at all can cause a crowd panic. These panic reactions often lead to tragic events and cause harm to people seen for example on the panic at the loveparade 2010 \cite{dumbs_massenpanik_2010} . That events also show that the reaction of the individual agent is way more complex in a panic situation than under normal circumstances, this makes the development for a crowd behavioural model of course difficult, in addition the paper also states that there is not enough suitable data to the their panic model. 
+
+The paper gives an definition of features of a panic situation, some of them are (1) People move faster than normal (2) People start pushing and so on. They use these features to construct a behaviour model based on the "generelized force model" (TODO cite 15) 
+\begin{quote}
+"We assume a mixture of psychological and physical forces influencing the behaviour in a crowd"
+\end{quote}
+Again the mathematically details are not displayed here for reasons of clarity. They also ran a number of different tests with the model, the results show the following:
+\begin{itemize}
+\item "Transition to in-coordination due to clogging" In a situation where the crowd want to exit an area trough a small gap, the number of people leaving get smaller when the velocity of the crowd increases.
+\item "Faster-is-slower effect due to impatience", clogging can appear also when there is a wider gap in the escape route. 
+\item "Mass behaviour" Here the goal was to leave a room with smoke in it, results showed that the quickest evacuation would be possible when there is a equal mixture of individualistic and herding behaviour. 
+\end{itemize}
+In their model they have a "panic parameter" which allows to adjust the "amount" of panic in comparison to a normal daily situation. Because the results are also observed in real crowd panics, their model is often used as a base for a number of evacuation simulations. (TODO: insert cites here)
 
 %%
 %% The acknowledgments section is defined using the "acks" environment
