@@ -89,12 +89,12 @@
 }
 \email{e1633012@student.tuwien.ac.at}
 
-\author{Bernhard Kerbl}
-\affiliation{
-	\institution{Institute of Visual Computing \& Human-Centered Technology, Technical University Vienna}
-}
-\authornote{Advisor}
-\email{kerbl@cg.tuwien.ac.at}
+%%\author{Bernhard Kerbl}
+%%\affiliation{
+%%	\institution{Institute of Visual Computing \& Human-Centered Technology, Technical University Vienna}
+%%}
+%%\authornote{Advisor}
+%%\email{kerbl@cg.tuwien.ac.at}
 
 %%
 %% By default, the full list of authors will be used in the page
@@ -218,7 +218,50 @@ On the other hand microscopic models, also referred as "agent-based"\cite{xu_cro
 
 \cite{xu_crowd_2014}\cite{thalmann_crowd_2013}
 
-\subsection{NEXT}
+\subsection{crowd rendering overview}
+TODO
+\subsection{elementary papers}
+In the following section i want to sum up some often cited and elementary papers for crowd simulation. 
+\subsubsection{Flocks, herds, and schools: A distributed behavioral model.}\cite{reynolds_flocks_1987}
+is one of the most famous first published papers for the field. The paper describes an approach for modeling a simulation of a flock of birds and other crowds. At that time the common way to simulate a crowd would be to script the path of each agent individually. Reynolds defined some key concepts and keywords for the crowd simulation field for example he introduced the idea of what later would become known as agend-based or microscopic simulation:
+\begin{quote}
+"Yet all evidence indicates that flock motion must be merely the aggregate result of the actions of individual animals, each acting solely on the basis of its own local perception of the world. (...) This approach assumes a flock is simply the result of the interaction between the behaviors of individual birds. To simulate a flock we simulate the behavior of an individual bird (...)"
+\end{quote}
+He also compares his approach to a particle system for simulating dynamic "fuzzy objects", but the differences in his approach is that each particle/bird has a complex geometrical state (orientation, animation for example flight banking) and that a bird flock is more complex to describe than other particle systems like a fire for example in addition basic particle systems do not simulate the interaction between the particles.  
+\begin{quote}
+"Boid behavior is dependent not only on internal state but also on external state"
+\end{quote}
+He defines the \textbf{actor} as "computational abstraction that combines process, procedure, and state." This is still relevant because most microscopic simulation approaches use a similar concept for abstracting the simulation system from the actual application, here a bird flock.  
+In addition there is also a chapter on how flocks are interacting with another. An interesting statement is: 
+\begin{quote}
+"birds can flock with any number of flockmates because they are using what would be called in formal computer science a constant time algorithm. "
+\end{quote}
+The reason for this is that the birds does not include all other individual birds for their decision making, instead they only rely on itself, the nearest neighbors and a filtered perception on the rest of the flock. This  filtering of  information is also seen on other papers which cover level of detail in crowd simulations \cite{osullivan_levels_2002}. Of course in a simulation there will be a limit for a maximum of individual agents. 
+
+The paper continues with more information about the aspects of what to consider when rendering crowds with the example of the bird flock and other animal crowds. Many of these aspects and problems are still relevant in current papers that is the reason why this an important elementary paper in the crowd simulation field, however when it comes to details in the implementation of the algorithm there are more up to date approaches. 
+
+\subsubsection{Social force model for pedestrian dynamics}\cite{helbing_social_1995} is an important paper when it comes to pedestrian simulation for common daily tasks, these crowd flow simulations are used in the architectural field in planning state for large buildings train station, airports, shopping centers etc.. 
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=1\linewidth]{images/helbingSocialForceConceptScheme.png}
+  \caption{sequence of actions in the social force concept, taken from \cite{helbing_social_1995}}
+  \Description{sequence of actions in the social force concept}
+  \label{fig:helbingSchema}
+\end{figure}
+Fig. \ref{fig:helbingSchema} shows the sequence of actions lead to the a action for the individual crowd agent, which leads back to research done by Lewin \cite{lewin_field_1951}. The Stimulus is used as an trigger like someone is blocking the way, this results in the process of handling the situation which creates an motivation to act and in the final form a reaction which is carried out. This concept can be applied to all situations, \cite{helbing_social_1995} however describes a model for common situation which are decided usually automatically and intuitively by the person. The idea is to describe the pedestrian movement indirectly through describing the external forces which affects the agent. 
+Helbings social force model uses 3 main effects for the model:
+\begin{enumerate}
+    \item the goal for the person is to reach some sort of target destination as easy as possible, usually the fasted route.
+    \item "repulsive effect", the pedestrian wants to "keep a certain distance from other pedestrians that depends on the pedestrian density and the desired speed". In addition the pedestrian also want to keep distance to borders.  
+    \item "attracted effect", the pedestrians " are sometimes attracted by other persons (friends, street artists, etc.) or objects (e.g., window displays)."
+\end{enumerate}
+In the paper all effects are described in detail with mathematically equations, these are not displayed here for reasons of clarity. The result movement decision is the sum of all effects plus a fluctuation term for situations where two alternatives are rated equally. Simulations with this models shows 
+\begin{quote}
+    "(i) the development of lanes consisting of pedestrians who walk into the same direction and (ii) oscillatory changes of the walking direction at narrow passages."
+\end{quote}
+This behaviour can also be observed in real world scenarios. 
+
+\subsubsection{Simulating dynamical features of escape panic}\cite{helbing_simulating_2000} on the other hand there is also a need for simulating pedestrians in a panic situation, a common example are evacuation simulations (TODO: link papers applicaitons etc)
 
 %%
 %% The acknowledgments section is defined using the "acks" environment
