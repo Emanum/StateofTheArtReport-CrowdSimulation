@@ -195,7 +195,7 @@ At the beginning some information for the research field in general. The researc
 
 \subsection{Key areas}
 
-For a believable crowd simulation there are two parts. First we need to have \textbf{"behavioral animation and environment modeling"}\cite{thalmann_crowd_2013} which defines how the crowd is moving and reacting to each other and the environment. Some example research topic here are for example "Flocks, herds and schools: A distributed behavioral model"\cite{reynolds_flocks_1987} or "Social force model for pedestrian dynamics"\cite{helbing_social_1995}. Second we also need \textbf{"crowd rendering"}\cite{thalmann_crowd_2013} for displaying the large amount of agents in the crowd, where performance is especially important in real time simulations. Crowd rendering also researches the level of detail we are rending, a evacuation simulation could use points or a simple 3D model of a person on the other hand a simulation for movies or games would need more details. Here some examples would be "TODO".
+For a believable crowd simulation there are two parts. First we need to have \textbf{"behavioral animation and environment modeling"}\cite{thalmann_crowd_2013} which defines how the crowd is moving and reacting to each other and the environment. Some example research papers here are for example "Flocks, herds and schools: A distributed behavioral model"\cite{reynolds_flocks_1987} or "Social force model for pedestrian dynamics"\cite{helbing_social_1995}. Second we also need \textbf{"crowd rendering"}\cite{thalmann_crowd_2013} for displaying the large amount of agents in the crowd, where performance is especially important in real time simulations. Crowd rendering also researches the level of detail we are rending, a evacuation simulation could use points or a simple 3D model of a person on the other hand a simulation for movies or games would need more details. Here some examples would be "TODO".
 
 Most application on crowd simulation focus on one of two key areas: 
 \begin{itemize}
@@ -261,10 +261,10 @@ In the paper all effects are described in detail with mathematically equations, 
 \end{quote}
 This behaviour can also be observed in real world scenarios. 
 
-\subsubsection{Simulating dynamical features of escape panic}\cite{helbing_simulating_2000} on the other hand there is also a need for simulating pedestrians in a panic situation, a common example are evacuation simulations (TODO: link papers applications etc). 
+\subsubsection{Simulating dynamical features of escape panic}\cite{helbing_simulating_2000} on the other hand there is also a need for simulating pedestrians in a panic situation, a common example are evacuation simulations.
 There are a number of reasons for a panic reaction in a crowd, unexpected actions like an loud gun shot or a fire are a common reasons most people would think about. But also expected situations like the race for a limited amount of resources (tickets, seats, toilet paper in the corona crisis)  and situations without any cause at all can cause a crowd panic. These panic reactions often lead to tragic events and cause harm to people seen for example on the panic at the loveparade 2010 \cite{dumbs_massenpanik_2010} . That events also show that the reaction of the individual agent is way more complex in a panic situation than under normal circumstances, this makes the development for a crowd behavioural model of course difficult, in addition the paper also states that there is not enough suitable data to the their panic model. 
 
-The paper gives an definition of features of a panic situation, some of them are (1) People move faster than normal (2) People start pushing and so on. They use these features to construct a behaviour model based on the "generelized force model" (TODO cite 15) 
+The paper gives an definition of features of a panic situation, some of them are (1) People move faster than normal (2) People start pushing and so on. They use these features to construct a behaviour model based on the "generelized force model"\cite{hindsley_investigation_1986}
 \begin{quote}
 "We assume a mixture of psychological and physical forces influencing the behaviour in a crowd"
 \end{quote}
@@ -274,7 +274,10 @@ Again the mathematically details are not displayed here for reasons of clarity. 
 \item "Faster-is-slower effect due to impatience", clogging can appear also when there is a wider gap in the escape route. 
 \item "Mass behaviour" Here the goal was to leave a room with smoke in it, results showed that the quickest evacuation would be possible when there is a equal mixture of individualistic and herding behaviour. 
 \end{itemize}
-In their model they have a "panic parameter" which allows to adjust the "amount" of panic in comparison to a normal daily situation. Because the results are also observed in real crowd panics, their model is often used as a base for a number of evacuation simulations. (TODO: insert cites here)
+In their model they have a "panic parameter" which allows to adjust the "amount" of panic in comparison to a normal daily situation. Because the results are also observed in real crowd panics, their model is often used as a base for a number of other evacuation simulation papers. \cite{braun_simulating_2005} \cite{zheng_modeling_2009}
+
+\section{Application Areas}
+
 
 %%
 %% The acknowledgments section is defined using the "acks" environment
