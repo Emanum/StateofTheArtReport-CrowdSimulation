@@ -41,10 +41,9 @@
 \acmDOI{10.1145/1122445.1122456}
 
 %% These commands are for a PROCEEDINGS abstract or paper.
-\acmConference[Woodstock '18]{Woodstock '18: ACM Symposium on Neural  Gaze Detection}{June 03--05, 2018}{Woodstock, NY}
-\acmBooktitle{Woodstock '18: ACM Symposium on Neural Gaze Detection,
-  June 03--05, 2018, Woodstock, NY}
-\acmPrice{15.00}
+\acmConference[Scientific Research and Writing]{Scientific Research and Writing 2020S Part 2 with CG-Group}{2020S}{TU Vienna}
+\acmBooktitle{Scientific Research and Writing 2020S Part 2 with CG-Group - Crowd Simulation}
+\acmPrice{42,42}
 \acmISBN{978-1-4503-XXXX-X/18/06}
 
 
@@ -278,7 +277,7 @@ In their model they have a "panic parameter" which allows to adjust the "amount"
 
 As the research field for crowd simulation is already wide spread over multiple science fields and communities the resulting application areas are of course too. The applications can be roughly grouped by the key areas mentioned before \ref{chap:key_areas}. 
 
-\subsection{realism focused simulation }
+\subsection{realism focused simulation}
 
 In the area of realism focused simulation pedestrian and traffic simulation plays a big role, as these are used to simulate large urban areas. There are a number of commercial available software for similar use-cases like simulating the crowd flow on events, public transport buildings, airports and even cruise ships and whole city districts. They often feature come with extended features which goes beyond the crowd simulation like heat-maps, smoke simulation, integration for 3D models and other CAD applications, recording and playback and so on. The customers for these applications are public transport companies, architectural offices, event organizers and the public governance sector. The simulation allows them to reduce costs in the planning phase and optimize their infrastructure, simulation of the evacuation times required is also a market for these applications.  Some example Applications are "Pedestrian Dynamics®" \cite{pedestrian_dynamics_pedestrian_2020}, "MassMotion"  \cite{mediaworks_pedestrian_2020} and "Anylogic" \cite{anylogic_website}
 
@@ -310,12 +309,47 @@ An other commercial software for CGI crowds is "Golaem" \cite{golaem_website}. T
 \subsubsection{Games}
 
 As games and other interactive media are real-time simulations they have limited capabilities for costly simulations, so crowd simulations are not so common in today's games. One game genre that uses them are real-time strategy games like Total War \cite{total_war_website}, where the crowd simulation can also have an effect on the gameplay and not only used to render visually appealing large crowds. 
-Many approaches for real time simulation is used one common used technique is the LOD (level of detail) for the rendering of the crowd and also for the simulation it self. However LOD is more complex when used on the actual crowd behaviour simulation than on the crowd rendering itself, there is always the danger of getting an wrong simulated world when the simulation detail level is too low. Another common used trick is to render one simulated agent as multiple persons to simulate a crowd. Lastly as games are usually run on a powerful GPU, real time crowd simulation can also benefit from that, especially the rendering part is good manageable by the GPU. 
+Many approaches for real time simulation is used one common used technique is the LOD (level of detail) for the rendering of the crowd and also for the simulation it self. However LOD is more complex when used on the actual crowd behaviour simulation than on the crowd rendering itself, there is always the danger of getting an wrong simulated world when the simulation detail level is too low. Another common used trick is to render one simulated agent as multiple persons to simulate a crowd. Lastly as games are usually run on a powerful GPU, real time crowd simulation can also benefit from that, especially the rendering part is good manageable by the GPU. \cite{thalmann_crowd_2013}
 
 An example of what can be done with various optimization is "Ultimate Epic Battle Simulator" \cite{ultimeEpicBattleSim_video} , which is basically a big real-time crowd simulation sandbox. They manage to simulate path tracing on up to ten thousands of individual soldiers in real time . 
 \begin{quote}
 "The algorithm is a highly optimized version of A*.  The memory is shared, but the paths are not." \cite{ultimeEpicBattleSim_video}
 \end{quote} This example shows that crowd simulation at games comes with a big trade off for performance. 
+
+\section{Research Areas}
+
+The rough separation of the research field described in \ref{chap:key_areas} can be extended for more detail. \cite{thalmann_crowd_2013}
+
+\subsection{Generation of virtual individuals}
+
+To simulate a realistic crowd it is necessary to have different 3D models to display in our crowd. The goal in this area is to develop methods which reduce the cost of time to create such models. There are multiple approaches which i want to give an quick overlook. Which approach to choose depends on multiple aspects like quality needed, amount of time which can be invested, what type of agents to produce (persons, cars, ...) and many more. 
+\subsubsection{manually model agents}, the most basic way is of course to model each agent manually. The challenge is to also keep the polygon count low as this is required later on when we want to render the crowd. Techniques like subdivision modeling and patch modeling are used to achieve that.
+\subsubsection{reconstruct from existing data}, another approach is to use already existing data in the form of videos, a photo series or a 3D Scan from agents we want to simulate. Hole filling, noise reduction and skeleton hierarchy approximation are some challenges this approach faces in the process of finalizing the models. 
+\subsubsection{interpolate existing models}, on some cases there are already models available to use, of course these can also come from the approaches mentioned before. We can use these models to interpolate between multiple models to create new ones. Some papers also construct a template agent which can be used to generate models with given parameters (height, body type, ...)
+\subsubsection{auto generated models from population}, an optimum would be to generate a large amount of diverse looking agents with as little information as possible, this idea is the goal for that methods. However it is rather hard to create models that can compete against models from other approaches, one promising approach is the "somatotype model". It uses multiple extreme somatotypes and tries to generate models in between them. The demand for efficient result analysis, to evaluate the generated models is another challenge. This is done with microscopic analysis, for testing the appearance to the input data and macroscopic analysis for testing the diversity of generated models. 
+\subsubsection{computer vision}, is also another approach to generated customized models. This allows the user to generate a model based on an image, it is used in some games in the character creation process. 
+\subsubsection{vary model for large crowds}, one problem with all approaches is that they only work for a limited amount of agents effectively. To prevent the use of nearly similar looking agents and to reduce the memory needed for storing and later also rendering the agents it is possible to vary the generated models. This can be done on multiple levels like skeleton, meshes, textures and animations. 
+
+\subsection{Crowd animation}
+
+coll avoidance, path finding, 
+
+\subsection{Crowd behavior generation}
+
+reaction to other agents, modelling perception
+
+\subsection{Interaction with virtual crowds}
+
+how to control crowd behaviour
+
+\subsection{Virtual crowd rendering}
+
+rendering large number of individual agents
+
+\subsection{Integration of crowds in virtual environments}
+
+
+
 
 %%
 %% The acknowledgments section is defined using the "acks" environment
