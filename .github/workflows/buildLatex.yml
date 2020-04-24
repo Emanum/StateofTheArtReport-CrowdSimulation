@@ -15,3 +15,9 @@ jobs:
         with:
           name: crowdSimulation
           path: crowdSimulation-StateofTheArtReport.pdf
+     - name: Upload to release
+        uses: JasonEtco/upload-to-release@master
+        with:
+          args: crowdSimulation-StateofTheArtReport.pdf
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
