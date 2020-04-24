@@ -204,7 +204,7 @@ Most application on crowd simulation focus on one of two key areas:
 \cite{thalmann_crowd_2013}
 
 \subsection{Simulation Models}
-
+\label{chap:simulationModels}
 To simulate realistic crowd behavior a model is needed which specifies how the crowd reacts in each simulation step. The used models can be classified in roughly two groups macroscopic and microscopic models. The difference is how they see an agent in a crowd. An \textbf{agent} is a single actor in a crowd simulation which can move and act independently from other agents, this can be a human in a crowd of people but also a car in a traffic simulation. However on some applications and paper especially those who handle real time simulations agents are grouped to reduce the simulation cost and only rendered as multiple agents / persons, an example are the "TotalWar" \cite{total_war_website} \cite{thalmann_crowd_2013} game series.
 
 \subsubsection{\textbf{macroscopic models}}
@@ -218,6 +218,7 @@ On the other hand microscopic models, also referred as "agent-based"\cite{xu_cro
 \subsection{crowd rendering overview}
 TODO
 \subsection{elementary papers}
+\label{chapter:elementaryPapers}
 In the following section i want to sum up some often cited and elementary papers for crowd simulation. 
 \subsubsection{Flocks, herds, and schools: A distributed behavioral model.}\cite{reynolds_flocks_1987}
 is one of the most famous first published papers for the field. The paper describes an approach for modeling a simulation of a flock of birds and other crowds. At that time the common way to simulate a crowd would be to script the path of each agent individually. Reynolds defined some key concepts and keywords for the crowd simulation field for example he introduced the idea of what later would become known as agend-based or microscopic simulation:
@@ -271,7 +272,7 @@ Again the mathematically details are not displayed here for reasons of clarity. 
 \item "Faster-is-slower effect due to impatience", clogging can appear also when there is a wider gap in the escape route. 
 \item "Mass behaviour" Here the goal was to leave a room with smoke in it, results showed that the quickest evacuation would be possible when there is a equal mixture of individualistic and herding behaviour. 
 \end{itemize}
-In their model they have a "panic parameter" which allows to adjust the "amount" of panic in comparison to a normal daily situation. Because the results are also observed in real crowd panics, their model is often used as a base for a number of other evacuation simulation papers. \cite{braun_simulating_2005} \cite{zheng_modeling_2009}
+In their model they have a "panic parameter" \label{term:panicParameter} which allows to adjust the "amount" of panic in comparison to a normal daily situation. Because the results are also observed in real crowd panics, their model is often used as a base for a number of other evacuation simulation papers. \cite{braun_simulating_2005} \cite{zheng_modeling_2009}
 
 \section{Application Areas}
 
@@ -313,12 +314,26 @@ Many approaches for real time simulation is used one common used technique is th
 
 An example of what can be done with various optimization is "Ultimate Epic Battle Simulator" \cite{ultimeEpicBattleSim_video} , which is basically a big real-time crowd simulation sandbox. They manage to simulate path tracing on up to ten thousands of individual soldiers in real time . 
 \begin{quote}
-"The algorithm is a highly optimized version of A*.  The memory is shared, but the paths are not." \cite{ultimeEpicBattleSim_video}
+"The algorithm is a highly optimized version of A*.  \label{term:A*Usage} The memory is shared, but the paths are not." \cite{ultimeEpicBattleSim_video}
 \end{quote} This example shows that crowd simulation at games comes with a big trade off for performance. 
 
 \section{Research Areas}
 
 The rough separation of the research field described in \ref{chap:key_areas} can be extended for more detail. \cite{thalmann_crowd_2013}
+
+\subsection{Crowd behavior generation}
+
+An automated model which animates the crowd movement is the core component for crowd simulation. Here the goal is that our agents does not need to be animated manually where to go and how to interact with each other. The creator of the animation only provides some goals, for example escape from the building and sets parameters like the "panic parameter" see \ref{term:panicParamete}. We already talked about some important aspects of that field in \ref{chap:simulationModels} and \ref{chapter:elementaryPapers}.  In this research area there are a lot of different approaches and the problem of application specific algorithms is bigger than in other areas.
+
+In the following i want to describe the different challenges we face in this area:
+\subsubsection{Behavioral model}
+We want a realistic crowd behavioral model for our specific use case which does not cost much performance and at the same be adaptable so that the creator of the animation can control it later on interactively see \ref{chap:interactionWithVirtualCrowds}. The model has to control how the individual agents gather in small groups and interact with each other for example there can be multiple types of crowd agents a leader, follower and people who want to walk alone are some examples which can be adapted for the application specific needs. Some example models here are \cite{musse_hierarchical_2001} for real time applications and \cite{braun_simulating_2005} for non real time evacuation applications, the selection of a model depends on the actual application and its individual needs. 
+\subsubsection{Crowd navigation}
+Deals with the motion planning of a path from the beginning position to the goal position the agents have to reach in the long term. Some research here comes from the robotics field as these share similar problem like \textbf{collision avoidance and path planning}. However the algorithms have to be adapted for use in crowd simulations as there are additional challenges like performance. To circumvent this the path planning is done with abstract graphs, some of them are "grid graph", "point graph", "Navigation mesh / visibility graph", "Probabilistic roadmaps", "Rapidly exploring randomized trees" and "Voronoi diagrams". After modeling graph search algorithms are run to plan the path to the goal these include "Breadth-ﬁrst search (BFS)",  "Depth-ﬁrst search (DFS)", "Dijkstra’s algorithm", "A* algorithm" used in \ref{term:A*Usage} and hybrid approaches. An detailed description for the here explained graphs and algorithms can be found in the state of the art report of\cite{jaros_crowd_2014}. 
+\subsubsection{Collision avoidance}
+Collision Avoidance algorithms have to be used to prevent collisions between the dynamic environment (cars, collapsing building) and the individual agents each other. The challenge is that we don't know the velocity and direction each collision object will move in the future, and communication is usually not possible. A common approach is to predict the future movement through extrapolation \cite{karamouzas_predictive_2009}. Another would be to use vision-based approach \cite{ondrej_synthetic-vision_2010}.
+\subsubsection{Additional behaviors}
+For a realistic looking crowd there are often more animations than the core walking animation needed. Some papers for example research gaze animations and eye movement. 
 
 \subsection{Generation of virtual individuals}
 
@@ -332,17 +347,12 @@ To simulate a realistic crowd it is necessary to have different 3D models to dis
 
 \subsection{Crowd animation}
 
-After the generation of different models for our crowd we want to bring some life to it by animation. Some aspects we have to consider when creating animations are that they should not take much computational cost and be scale able for a large amount of actors, allow level of detail gradation and provide a diverse select of possible matching. The animation consists of primary movements and secondary, when we take a person walking animation as example the actual walking would be the primary and other movements like hand gestures or phone interaction the secondary.
-A often used approach is the use of an animation database, that is precalculated and can be used in the simulation later on. The database can be filled using locomotion cycles with procedural modeling or with motion capture of real animations. In the case of motion capture a statistical model can be calculated which allows to produre a locomotion model. 
-
-
-TODO: locomotion beschreiben
-
-\subsection{Crowd behavior generation}
-
-reaction to other agents, modelling perception
+After the generation of different models for our crowd we want to bring some life to it by animation. Some aspects we have to consider when creating animations are that they should not take much computational cost,  be able to scale for a large amount of actors, allow level of detail gradation and provide a diverse select of possible matching. The animation consists of primary movements and secondary, when we take a person walking animation as example the actual walking would be the primary and other movements like hand gestures or phone interaction the secondary.
+A often used approach is the use of an animation database, that is precalculated and can be used in the simulation later on. The database can be filled using locomotion cycles with procedural modeling or with motion capture of real animations. In the case of motion capture a statistical model can be calculated which allows to produce a locomotion model. For more details see \cite{thalmann_crowd_2013}
 
 \subsection{Interaction with virtual crowds}
+
+\label{chap:interactionWithVirtualCrowds}
 
 how to control crowd behaviour
 
