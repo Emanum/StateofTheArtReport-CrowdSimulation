@@ -1,5 +1,5 @@
-name: Build LaTeX document as artifact
-on: [push]
+name: Release LaTeX document
+on: [release]
 jobs:
   build_latex:
     runs-on: ubuntu-latest
@@ -10,8 +10,9 @@ jobs:
         uses: dante-ev/latex-action@master
         with:
           root_file: crowdSimulation-StateofTheArtReport.tex
-      - name: Upload generated PDF 
-        uses: actions/upload-artifact@v1
+      - name: Upload to release
+        uses: JasonEtco/upload-to-release@master
         with:
-          name: crowdSimulation
-          path: crowdSimulation-StateofTheArtReport.pdf
+          args: crowdSimulation-StateofTheArtReport.pdf application/pdf
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
