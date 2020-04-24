@@ -332,7 +332,11 @@ To simulate a realistic crowd it is necessary to have different 3D models to dis
 
 \subsection{Crowd animation}
 
-coll avoidance, path finding, 
+After the generation of different models for our crowd we want to bring some life to it by animation. Some aspects we have to consider when creating animations are that they should not take much computational cost and be scale able for a large amount of actors, allow level of detail gradation and provide a diverse select of possible matching. The animation consists of primary movements and secondary, when we take a person walking animation as example the actual walking would be the primary and other movements like hand gestures or phone interaction the secondary.
+A often used approach is the use of an animation database, that is precalculated and can be used in the simulation later on. The database can be filled using locomotion cycles with procedural modeling or with motion capture of real animations. In the case of motion capture a statistical model can be calculated which allows to produre a locomotion model. 
+
+
+TODO: locomotion beschreiben
 
 \subsection{Crowd behavior generation}
 
