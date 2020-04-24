@@ -1,5 +1,7 @@
 name: Release LaTeX document
-on: [release]
+on: 
+  release:
+    types: [created]
 jobs:
   release_latex:
     runs-on: ubuntu-latest
