@@ -215,8 +215,6 @@ On the other hand microscopic models, also referred as "agent-based"\cite{xu_cro
 
 \cite{xu_crowd_2014}\cite{thalmann_crowd_2013}
 
-\subsection{crowd rendering overview}
-TODO
 \subsection{elementary papers}
 \label{chapter:elementaryPapers}
 In the following section i want to sum up some often cited and elementary papers for crowd simulation. 
@@ -326,17 +324,22 @@ The rough separation of the research field described in \ref{chap:key_areas} can
 An automated model which animates the crowd movement is the core component for crowd simulation. Here the goal is that our agents does not need to be animated manually where to go and how to interact with each other. The creator of the animation only provides some goals, for example escape from the building and sets parameters like the "panic parameter" see \ref{term:panicParameter}. We already talked about some important aspects of that field in \ref{chap:simulationModels} and \ref{chapter:elementaryPapers}.  In this research area there are a lot of different approaches and the problem of application specific algorithms is bigger than in other areas.
 
 In the following i want to describe the different challenges we face in this area:
+
+
 \subsubsection{Behavioral model}
-We want a realistic crowd behavioral model for our specific use case which does not cost much performance and at the same be adaptable so that the creator of the animation can control it later on interactively see \ref{chap:interactionWithVirtualCrowds}. The model has to control how the individual agents gather in small groups and interact with each other for example there can be multiple types of crowd agents a leader, follower and people who want to walk alone are some examples which can be adapted for the application specific needs. Some example models here are \cite{musse_hierarchical_2001} for real time applications and \cite{braun_simulating_2005} for non real time evacuation applications, the selection of a model depends on the actual application and its individual needs. 
+We want a realistic crowd behavioral model for our specific use case which does not cost much performance and at the same be adaptable so that the creator of the simulation is still able to control the crowd from an wider point of view. The model has to control how the individual agents gather in small groups and interact with each other for example there can be multiple types of crowd agents a leader, follower and people who want to walk alone are some examples which can be adapted for the application specific needs. Some example models here are \cite{musse_hierarchical_2001} for real time applications and \cite{braun_simulating_2005} for non real time evacuation applications, the selection of a model depends on the actual application and its individual needs.
+
+
 \subsubsection{Crowd navigation}
 Deals with the motion planning of a path from the beginning position to the goal position the agents have to reach in the long term. Some research here comes from the robotics field as these share similar problem like \textbf{collision avoidance and path planning}. However the algorithms have to be adapted for use in crowd simulations as there are additional challenges like performance. To circumvent this the path planning is done with abstract graphs, some of them are "grid graph", "point graph", "Navigation mesh / visibility graph", "Probabilistic roadmaps", "Rapidly exploring randomized trees" and "Voronoi diagrams". After modeling graph search algorithms are run to plan the path to the goal these include "Breadth-ﬁrst search (BFS)",  "Depth-ﬁrst search (DFS)", "Dijkstra’s algorithm", "A* algorithm" used in \ref{term:A*Usage} and hybrid approaches. An detailed description for the here explained graphs and algorithms can be found in the state of the art report of\cite{jaros_crowd_2014}. 
 \subsubsection{Collision avoidance}
 Collision Avoidance algorithms have to be used to prevent collisions between the dynamic environment (cars, collapsing building) and the individual agents each other. The challenge is that we don't know the velocity and direction each collision object will move in the future, and communication is usually not possible. A common approach is to predict the future movement through extrapolation \cite{karamouzas_predictive_2009}. Another would be to use vision-based approach \cite{ondrej_synthetic-vision_2010}.
+
+
 \subsubsection{Additional behaviors}
 For a realistic looking crowd there are often more animations than the core walking animation needed. Some papers for example research gaze animations and eye movement. 
 
-\subsection{Generation of virtual individuals}
-
+\subsection{Generation of individual agents}
 To simulate a realistic crowd it is necessary to have different 3D models to display in our crowd. The goal in this area is to develop methods which reduce the cost of time to create such models. There are multiple approaches which i want to give an quick overlook. Which approach to choose depends on multiple aspects like quality needed, amount of time which can be invested, what type of agents to produce (persons, cars, ...) and many more. 
 \subsubsection{manually model agents}, the most basic way is of course to model each agent manually. The challenge is to also keep the polygon count low as this is required later on when we want to render the crowd. Techniques like subdivision modeling and patch modeling are used to achieve that.
 \subsubsection{reconstruct from existing data}, another approach is to use already existing data in the form of videos, a photo series or a 3D Scan from agents we want to simulate. Hole filling, noise reduction and skeleton hierarchy approximation are some challenges this approach faces in the process of finalizing the models. 
@@ -353,9 +356,9 @@ A often used approach is the use of an animation database, that is precalculated
 
 \subsection{Interaction with virtual crowds}
 
-\label{chap:interactionWithVirtualCrowds}
+Another area is researching how information from real crowds could be used to optimize the crowd behavior for the virtual crowds. In the basic form people are observing real crowds and evaluate these results empirical to detect common patterns. These found patterns are later tried to generalise in the form of individual, group and sociological aspects which can be implemented in the behaviour models of applications to provide accurate representation of the real world. To the individual aspects count behavior as personal/individual space and communication between individuals. Social conventions, group formation and leader selection are examples for group aspects. Sociological aspects describe behavior between a group and individuals, polarization, domination and the loss of individuality's are some examples.  
 
-how to control crowd behaviour
+In addition the automatic information gathering using computer vision is also part of this research field. The benefit of using these techniques is that first it is way less time consuming than manual observation and second that the infrastructure needed is quite cheap and often already available in the form of security cameras on public places. The information extraction is not just limited to person movement, a simple motion capture for the use in animation is also possible or detection of events and their reactions, for example the persons reaction when an train is entering the platform. One example pipeline \cite{thalmann_crowd_2013} presented could be 1) extract trajectory for every person 2) group trajectories into "motion clusters" 3) compute an velocity field for each cluster 4) use these velocity fields in the virtual crowd simulation. 
 
 \subsection{Crowd rendering}
 
