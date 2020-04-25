@@ -1,5 +1,8 @@
-name: Build LaTeX document
-on: [push]
+name: Build LaTeX document as artifact
+on:
+  push:
+    branches:
+      - '**'
 jobs:
   build_latex:
     runs-on: ubuntu-latest
