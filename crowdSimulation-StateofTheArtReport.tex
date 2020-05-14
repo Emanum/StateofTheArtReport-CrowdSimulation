@@ -390,13 +390,13 @@ In the last chapter i want to present some concrete example researches in the cr
 
 \subsection{HiDAC System}
 
-The paper "Controlling Individual Agents in High-Density Crowd Simulation" \cite{pelechano_controlling_2007} is an interesting example because it combines multiple simulation models and algorithms to simulate a crowd in one system, which they call High-Density Autonomous Crowds (HiDAC). They focus on delivering a simulation which produces realistic crowds.
+The paper "Controlling Individual Agents in High-Density Crowd Simulation" \cite{pelechano_controlling_2007} is an interesting example because it combines multiple simulation models and algorithms to simulate a crowd in one system, which they call High-Density Autonomous Crowds (HiDAC) system. They focus on delivering a simulation which produces realistic crowds.
 In addition this papers also shows what aspects are to consider and how to design a simulation model.
 
 The initial problem is that there was no simulation model which can handle high-density crowds realistically. They want to combine the advantages of rule based and social force based models without their disadvantages.
 
 \subsubsection{architecture and goals}
-HiDAC is an agent based or microscopic simulation \ref{def:microscopic models}, so there is no higher system which controls the flow of the crowd each agent acts on its own.
+HiDAC is an agent based or microscopic simulation \ref{def:microscopic models}, so there is no higher system which controls the flow of the crowd, each agent acts on its own.
 Fig. \ref{fig:hidacArchitecture} shows the two main modules of the system. The high-level module is responsible for long term tasks like wayfinding by choosing attractor points for each agent. Other more detailed or spontaneous tasks are done by the low-level module like collision avoidance to other agents  within a bounded space.
 \begin{figure}[h]
   \centering
@@ -410,7 +410,7 @@ For better performance and more realistic behavior the model separates the envir
 The goals of the system are the following:
 \begin{itemize}
     \item Preventing agents from appearing to vibrate (shaking behavior), which is often seen on social force based systems especially in high density areas or when an agent is in a hurry.
-    \item Creating natural bi-directional flow rates, other simulations often lack the behaviour of lane formation which is observed in real crowds
+    \item Creating natural bi-directional flow rates, other simulations often lack the behaviour of lane formation which is however observed often in real crowds
     \item Queuing and other organized behavior
     \item Pushing through a crowd
     \item Agents falling and becoming obstacles 
@@ -420,8 +420,16 @@ The goals of the system are the following:
 \end{itemize}
 
 \subsubsection{solution}
+To achieve these goals, the papers presents a detailed calculation based on different forces and tricks. In the following i want to summarise the ideas of the model and calculation. 
 
+As a starting point they define a rectangle of influence for each agent, which is calculated based on the distance and angle to other static and dynamic objects. This allows to optimize performance as only objects in the own rectangle of influence has to be considered to further calculations. 
+There are three main forces \textbf{avoidance force, tangential force and repulsion force}. Avoidance force prevents direct collisions with objects it is applied to static objects and other agents. Tangential force happens between agents and is used to control agents in a situation where they run towards each other these are called bi-directional flows. On high density crowds this force allows the simulation to create the realistic behavior of lane formation, which interestingly is not explicitly implemented in the model but results from the applied forces. Lastly the repulsion force is triggered as a result of a collision with a static object like a wall or a other agent. The main difference is that agents, compared to walls, can be pushed away. 
 
+In addition to the forces there are other tricks which allows them to boost their realistic simulation. 
+One very important is the \textbf{stopping rule}, based on the personality and current situation an agent may stop moving for a given time before he continues walking toward its attractor, however the agent can still be pushed away. This rule solves the shaking problem which most social force models have, but still allows the realistic pushing forces on agents. 
+A similar rule is the \textbf{waiting rule} which allows queues to be formed on non panic situations. Modelling of a different \textbf{personal space} for each agent allows the system to perform pushing each other. 
+The systems also allows to simulate an falling agent as static obstacle in the case of a very dense crowd and special behaviour in panic situations. 
+The separation into different modules and communication between them allows the low-level module to detect bottlenecks and the high-level to find an alternative path, this is known as \textbf{crowd impatience}. Similar to this, rerouting in the case of a chancing environment works, for example when a door is blocked.
 
 %%
 %% The acknowledgments section is defined using the "acks" environment
