@@ -108,7 +108,7 @@
 \begin{abstract}
 The goal of this state of the art report is to give an broad overview of the topic and act as a starting point to readers who are completely new to the field. As crowd simulation is a wide field with different research communities, it is not possible to mention all approaches to the challenges this area faces, so the report focus on the challenges themselves and describe the idea behind common approaches. In addition there are references to different papers which either directly cover the approaches or literature which summarize the research in more detail.
 
-In the Introduction the research procedure, the two key areas, simulation models and often used terms as explained, additionally some elementary and often cited papers are described in more detail as they show the foundation of crowd simulation. The Report continues with an overview of application areas and where the research is applied with given real world examples. After that the research areas and problem these face are described in more detail. Lastly the report covers some promising algorithms and approaches in more detail as an example of recent published papers on the field. 
+In the Introduction the research procedure, the two key areas, simulation models and often used terms are explained, additionally some elementary and often cited papers are described in more detail as they show the foundation of crowd simulation. The Report continues with an overview of application areas and where the research is applied with given real world examples. After that the research areas and problem these face are described in more detail. Lastly the report covers some promising algorithms and approaches in more detail as an example of recent published papers on the field. 
 TODO: finalize intro after finished report
 \end{abstract}
 
@@ -197,7 +197,7 @@ For a believable crowd simulation there are two parts. First we need to have \te
 
 Most application on crowd simulation focus on one of two key areas: 
 \begin{itemize}
-\item \textbf{Realism of behavioural simulation:} The focus is to reproduce the real crowd close as possible. Crowd dynamics, movement, collision avoidance, independent decisions and simulation result evaluation are some keywords in this area. Example applications would be pedestrian and traffic simulation in urban areas especially at evacuation scenarios or big events or public buildings.
+\item \textbf{Realism of behavioural simulation:} The focus is to reproduce real crowds as close as possible. Crowd dynamics, movement, collision avoidance, independent decisions and simulation result evaluation are some keywords in this area. Example applications would be pedestrian and traffic simulation in urban areas especially at evacuation scenarios or big events or public buildings.
 \item \textbf{High quality rendering:} Here the focus lies on producing stunning videos with crowd simulation components, the behavior of the crowd should not always match reality here instead the animator decide based on creative decisions. Example applications are found in the form of plugins for 3D graphic software like "Autodesk Maya" or "Blender", libraries in pc or console games and finally as proprietary render engines and tools for movie blockbusters.
 \end{itemize}
 
@@ -210,7 +210,7 @@ To simulate realistic crowd behavior a model is needed which specifies how the c
 \subsubsection{\textbf{macroscopic models}}
 These types of models try to simulate the crowd as an whole unit, they are often used in a real-time scenario because the number of individual agents in the crowd does not highly affect performance in the simulation. In some papers they are also referred as "continuum-based"\cite{xu_crowd_2014}. The goal here is that the crowd as a whole reacts realistically. These simulation can be compared to gas or fluid simulations, because there is not each particle or in our case each agent simulated moreover there is a common path for the fluid or whole crowd simulated. An example are the pedestrian and crowd simulation papers from Hudges \cite{hughes_continuum_2002} \cite{hughes_flow_2003}
 
-\subsubsection{\textbf{microscopic models}}
+\subsubsection{\textbf{microscopic models}} \label{def:microscopic models}
 On the other hand microscopic models, also referred as "agent-based"\cite{xu_crowd_2014} try to simulate each single agent. The resulting simulation often brings better results than a simulation with a macroscopic model but it also costs more performance, so it is not suitable for simulating large crowds in real time. Most approaches define rules for each agent how to react to the environment and different scenarios. There is a lot of different papers and approaches which rules and attributes provide what results. A common used approach is force-based, famous cited papers are "Social force model for pedestrian dynamics" \cite{helbing_social_1995} and "Flocks, herds and schools: A distributed behavioral model" \cite{reynolds_flocks_1987}. 
 
 \cite{xu_crowd_2014}\cite{thalmann_crowd_2013}
@@ -383,6 +383,45 @@ As modelling these often large areas manually requires a lot of time the need fo
 Aerial photos, 2D maps and laser profiler data is used to reconstruction real world environments. This applications are usually applied at historically cities. 
 On the other hand parametric methods does not focus on the accurate representation of already existing areas, moreover they want to provide cities for specific use cases where the application can decide on the parameters these later can be filled with the crowd.  Another important aspect is that the environment has to be interactive, for example  crowd agents should be able to enter buildings.
 \cite{thalmann_crowd_2013}
+
+\section{concrete example papers}
+
+In the last chapter i want to present some concrete example researches in the crowd simulation field. 
+
+\subsection{HiDAC System}
+
+The paper "Controlling Individual Agents in High-Density Crowd Simulation" \cite{pelechano_controlling_2007} is an interesting example because it combines multiple simulation models and algorithms to simulate a crowd in one system, which they call High-Density Autonomous Crowds (HiDAC). They focus on delivering a simulation which produces realistic crowds.
+In addition this papers also shows what aspects are to consider and how to design a simulation model.
+
+The initial problem is that there was no simulation model which can handle high-density crowds realistically. They want to combine the advantages of rule based and social force based models without their disadvantages.
+
+\subsubsection{architecture and goals}
+HiDAC is an agent based or microscopic simulation \ref{def:microscopic models}, so there is no higher system which controls the flow of the crowd each agent acts on its own.
+Fig. \ref{fig:hidacArchitecture} shows the two main modules of the system. The high-level module is responsible for long term tasks like wayfinding by choosing attractor points for each agent. Other more detailed or spontaneous tasks are done by the low-level module like collision avoidance to other agents  within a bounded space.
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=1\linewidth]{images/hidac-architacture.png}
+  \caption{architecture overview of HiDAC,  taken from \cite{pelechano_controlling_2007}}
+  \Description{architecture overview of HiDAC}
+  \label{fig:hidacArchitecture}
+\end{figure}
+For better performance and more realistic behavior the model separates the environment into different rooms which are connected by "portals" such as doors. Each agent chooses an attractor point in the room and navigates to it, furthermore the agents only perform collision detection and other forces only to agents in the same room or in case the agent is in area of a portal to other agents in the area of that specific portal.
+
+The goals of the system are the following:
+\begin{itemize}
+    \item Preventing agents from appearing to vibrate (shaking behavior), which is often seen on social force based systems especially in high density areas or when an agent is in a hurry.
+    \item Creating natural bi-directional flow rates, other simulations often lack the behaviour of lane formation which is observed in real crowds
+    \item Queuing and other organized behavior
+    \item Pushing through a crowd
+    \item Agents falling and becoming obstacles 
+    \item Propagating panic
+    \item Exhibiting impatience
+    \item Reacting in real time to changes in the environment
+\end{itemize}
+
+\subsubsection{solution}
+
+
 
 %%
 %% The acknowledgments section is defined using the "acks" environment
