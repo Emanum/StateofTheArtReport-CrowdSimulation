@@ -431,6 +431,33 @@ A similar rule is the \textbf{waiting rule} which allows queues to be formed on 
 The systems also allows to simulate an falling agent as static obstacle in the case of a very dense crowd and special behaviour in panic situations. 
 The separation into different modules and communication between them allows the low-level module to detect bottlenecks and the high-level to find an alternative path, this is known as \textbf{crowd impatience}. Similar to this, rerouting in the case of a chancing environment works, for example when a door is blocked.
 
+\subsection{vision based system}
+
+"A Synthetic-Vision Based Steering Approach for Crowd Simulation" \cite{ondrej_synthetic-vision_2010} present an approach to control an microscopic simulation without using any forces instead relying purely on predictions based on the view for each agent.
+But in comparison to HiDAC where an whole crowd simulation system was described, this approach only focuses on individually walking humans and their collision avoidance behavior. In addition they explicitly do not focus on a high-performance solution however their are some notes on possible performance improvements and benchmarks included. 
+
+The basic idea is that each agent decides on their own visual perception of the environment and other agents if they can continue their path or need to make an adaption by turning or decelerating. Their are similar approaches in the robotics field but these use image processing to get the information needed, their system directly computes the visual image using 3D graphics processing on the GPU.
+The method they use does not explicitly check for collision instead it tries to minimize the chance of possible collision. The authors say that their approach using visual perception is better at imitating the real human locomotion control.
+
+\subsubsection{model overview}
+
+Their model is based on research from Cutting "How we avoid collisions with stationary and moving objects"(TODO cite), his results on how humans avoid collisions can be broken down to two questions: 
+\begin{itemize}
+\item Will a collision occur? This is decided by an angle to the obstacle named the bearing angle (TODO alpha). When the derivative of the angle \textbf{(TODO alpha punkt)} is zero a collision will occur. Fig\ref{fig:visualBearingangle} visualized the bearing angle and when a collision occurs.
+\item When will a collision occur? Using the rate-of-growth for obstacles humans can estimate the \textbf{time-to-collision (ttc)}
+\end{itemize}
+The paper changes the use of time-to-collision to time-to-interaction tti, so the time needed before the two participants get closest to another this can be a collision or a just a walk by. So in conclusion the information when and where two agents get the closest to another and if a collision will occur can be described by the pair (TODO alphaPunkt, tti).
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=1\linewidth]{images/visualApproach-bearingAngle.png}
+  \caption{bearing angle and its time-derivative to detect collisions,  taken from \cite{ondrej_synthetic-vision_2010}. The picture in the middle will result in a collision therefore the TODO alpha punkt is zero}
+  \Description{bearing angle}
+  \label{fig:visualBearingangle}
+\end{figure}
+
+
+
 %%
 %% The acknowledgments section is defined using the "acks" environment
 %% (and NOT an unnumbered section). This ensures the proper
