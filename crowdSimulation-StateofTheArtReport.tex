@@ -441,22 +441,40 @@ The method they use does not explicitly check for collision instead it tries to 
 
 \subsubsection{model overview}
 
-Their model is based on research from Cutting "How we avoid collisions with stationary and moving objects"(TODO cite), his results on how humans avoid collisions can be broken down to two questions: 
+The model is based on research from Cutting "How we avoid collisions with stationary and moving objects"(TODO cite), his results on how humans avoid collisions can be broken down to two questions: 
 \begin{itemize}
-\item Will a collision occur? This is decided by an angle to the obstacle named the bearing angle (TODO alpha). When the derivative of the angle \textbf{(TODO alpha punkt)} is zero a collision will occur. Fig\ref{fig:visualBearingangle} visualized the bearing angle and when a collision occurs.
+\item Will a collision occur? This is decided by an angle to the obstacle named the bearing angle $\alpha$ . When the derivative of the angle \textbf{\.{$\alpha$}} is zero a collision will occur. Fig\ref{fig:visualBearingangle} visualized the bearing angle and when a collision occurs.
 \item When will a collision occur? Using the rate-of-growth for obstacles humans can estimate the \textbf{time-to-collision (ttc)}
 \end{itemize}
-The paper changes the use of time-to-collision to time-to-interaction tti, so the time needed before the two participants get closest to another this can be a collision or a just a walk by. So in conclusion the information when and where two agents get the closest to another and if a collision will occur can be described by the pair (TODO alphaPunkt, tti).
-
 \begin{figure}[h]
   \centering
   \includegraphics[width=1\linewidth]{images/visualApproach-bearingAngle.png}
-  \caption{bearing angle and its time-derivative to detect collisions,  taken from \cite{ondrej_synthetic-vision_2010}. The picture in the middle will result in a collision therefore the TODO alpha punkt is zero}
+  \caption{bearing angle and its time-derivative to detect collisions, taken from \cite{ondrej_synthetic-vision_2010}. The picture in the middle will result in a collision therefore \.{$\alpha$} is zero}
   \Description{bearing angle}
   \label{fig:visualBearingangle}
 \end{figure}
+The paper changes the use of time-to-collision to time-to-interaction tti, so the time needed before the two participants get closest to another this can be a collision or a just a walk by. So in conclusion the information when and where two agents get the closest to another and if a collision will occur can be described by the pair (\.{$\alpha$}, tti). As a general rule of thumb, turning changes \.{$\alpha$} and deceleration changes tti. 
 
+\subsubsection{implementation of steering and collision avoidance} A simplified version for the algorithm can described as following (for every agent):
+\begin{enumerate}
+    \item a virtual camera is set up using OpenGL with the view of the agent. Each pixel point represents an perceived point where the calculation is performed. 
+    \item based on the rendered image by the camera,the velocity and distance for obstacles and our own velocity we calculate the pair (\.{$\alpha$}, tti) for each perceived point.
+    \item When \.{$\alpha$} is below a threshold and $tti > 0$ and also lower than a threshold then a change in direction for this perceived point is necessary. 
+    \item the turning and deceleration information for each perceived point is combined into one metric 
+    \item updating the position of the agent using the calculated metric
+\end{enumerate}
 
+\subsubsection{results}
+
+Fig \ref{fig:visualResults} shows the results from the simulation. The advantage of this approach is the realistic lane formation behaviour as well as correctly handling a circle situation. Smooth animation are generated because deceleration only occurs right before a collision is happening. The simulation shows a visual appealing result however there is no confirmation if these results reflect the reality of crowds.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=1\linewidth]{images/visualApproach-results.png}
+  \caption{results showing the lane formation  and traffic circles behaviour, taken from \cite{ondrej_synthetic-vision_2010}.}
+  \Description{results}
+  \label{fig:visualResults}
+\end{figure}
 
 %%
 %% The acknowledgments section is defined using the "acks" environment
