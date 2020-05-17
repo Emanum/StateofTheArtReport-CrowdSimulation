@@ -476,6 +476,50 @@ Fig \ref{fig:visualResults} shows the results from the simulation. The advantage
   \label{fig:visualResults}
 \end{figure}
 
+\subsection{ViCrowd}
+
+The paper "Hierarchical model for real time simulation of virtual human crowds" \cite{musse_hierarchical_2001} presents a crowd simulation system named ViCrowd. 
+The goal is to deliver a complete simulation system that can run in real time. 
+There are multiple parts that makes this paper interesting and standing out from others in the field, these parts i want to summarize here. 
+
+\subsubsection{multilevel hierarchy}
+The model they use is unique because it is a combination of a macroscopic and microscopic model. The goal here is to use the performance advantage of macroscopic models while keeping the advantages of individualism and the resulting realism of microscopic models.
+They achieve this by taking the agents and assign them to different groups. As a result there are three complexity levels: (1) the whole crowd, (2) the different groups, (3) the individual agents. Although the assignment to the group is not fixed and an agent can convert to a different group during the simulation, but an agent is only assigned to one group at the same time.
+
+Each level has a different complexity and assigned tasks / calculations. 
+The simplest level is the agent level where only a small amount of the movement decisions are made, collision avoidance in the local area is one of them as this can't be done at the group level.
+The most influential level is that of the group, here is the most knowledge saved and complex decisions are made, for example path planning.
+At the crowd level only information relevant for all groups are stored and processed, foe example interest points of the scene.
+The information flow is mostly top to bottom so crowd$\rightarrow$group$\rightarrow$individual.
+This separation of levels and complexity allows the system to reduce the number complex tasks and reuse information for multiple individuals at a group level. The simulations gains an huge performance benefit while keeping most of the realistic behaviour of a pure microscopic model. 
+\subsubsection{combination of autonomous and scripted behaviour}
+ViCrowd provides three ways of handling group behaviour autonomous, guided and programmed. 
+Autonomous groups handle all their movement by themselves. Guided groups are controlled from an external controller in real time during the simulation. And programmed groups act at simulation time accordingly to their beforehand provided script. Users can define the crowd or group behaviour using the provided script language, at runtime the system assigns the scripts the to specific groups. 
+What is interesting about this approach is that all three methods can be combined even on the same group. For example the user can directly guide a group but the individual agents still handle the collision avoidance. To manage this they implemented a behaviour priority model for the different input methods.
+\subsubsection{crowd information}
+As basis for decision-making ViCrowd uses three categories of information. Knowledge, beliefs and intentions. 
+%%See Fig \ref{fig:hierarchicalInformationOverview} for an overview.
+%%
+Knowledge is about stored information about the real environment, position of obstacles etc.. 
+Belief is a set of behaviour and emotions individuals and groups share, for example flocking behaviour.
+Intentions usually are at group and individual level only and consists of goals to achieve, some examples are at group level interesting points and at individual level when to change to a different group.
+%%\begin{figure}[h]
+%%  \centering
+%%  \includegraphics[width=1\linewidth]{images/HierarchicalCrowdInformationOverview.png}
+%%  \caption{Overview of used information categories with examples, taken from \cite{musse_hierarchical_2001}.}
+%%  \Description{information overview}
+%%  \label{fig:hierarchicalInformationOverview}
+%%\end{figure}
+Fig. \ref{fig:hierarchicalarchitectureOverview} shows an overview of the complete ViCrowd system. The result is a low-level behavior for each group which is distributed to its assigned agents. The resulting pattern for each agent is similar to the other group members, but also includes their own details like local collision avoidance.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=1\linewidth]{images/HierarchicalArchitectureOverview.png}
+  \caption{Overview of the architecture of ViCrowd, taken from \cite{musse_hierarchical_2001}.}
+  \Description{architecture of ViCrowd}
+  \label{fig:hierarchicalarchitectureOverview}
+\end{figure}
+
 %%
 %% The acknowledgments section is defined using the "acks" environment
 %% (and NOT an unnumbered section). This ensures the proper
