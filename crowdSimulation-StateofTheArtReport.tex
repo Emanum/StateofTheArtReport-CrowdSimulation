@@ -550,6 +550,55 @@ The resulting animation shows a variety of different steering behaviour and smoo
 A big problem is the performance aspect, they only managed to do real-time simulation with two agents at 20 agents the performance dropped to ~5fps. 
 For future work a combination with a specific goal or a combination with other models is possible. In addition the definition of the influence function and query can also be approved.
 
+\subsection{ai-driven systems}
+An relative new approach are ai-driven simulation system as "Crowd simulation by deep reinforcement learning" \cite{lee_crowd_2018} shows. They use reinforcement learning and deep neural networks (DNN) with a simple reward function to simulate the way finding and collision avoidance for each agent individually, so it is a microscopic process. In comparison to the other presented systems this paper only focuses on the aspect of agent navigation but each agent has a target destination in the simulation.
+
+\subsubsection{model}
+They simplify the simulation to an 2D area. Each agent has a an radius $r$, a position $p$ and an orientation $\theta$, obstacles are modeled the same way except they don't have an orientation. 
+This simplifies the collision detect as this can easily be check by measuring the distance between two simulation objects and comparing it to the sum of their radii.
+
+For the reinforcement learning part they define the problem as an sequential decision-making more specifically as an Markov decision process, for more details please directly check the paper. The basic idea is that the deep neural network tries to optimize the reward function. This again is defined by 
+\begin{equation}
+R = r_{goal} + r_{collision} + r_{smooth}
+\end{equation}
+Where $r_{goal}$ influences the distance from the agent to the goal. $r_{collision}$ is a constant if an collision is occurred, the number of collisions does not matter here. $r_{smooth}$ is a function to cover the smoothness of the movement by comparing the resulting position and orientation to their minimum and maximum values.  
+
+\subsubsection{algorithm}
+To get input data for the reinforcement learning they use visual sensors which act like casting rays from the center of the agent see Fig. \ref{fig:aiConceptOverview}. When the simulation runs the system generates every simulation step new values for the agents position and orientation based on the DNN. When the learning process is active it also influences the DNN through the reward function.
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=1\linewidth]{images/aiAlgortihmn.png}
+  \caption{Overview of concept idea, red dot represents the agent, yellow dot the goal, grey dots other agents and the blue line the visual rays for the calculation of the path, taken from \cite{lee_crowd_2018}.}
+  \Description{concept idea of the ai-driven system}
+  \label{fig:aiConceptOverview}
+\end{figure}
+
+\subsubsection{results}
+To test their system they run tests with 4 different scenarios, see Fig. \ref{fig:aiScenarios}. In a first step the system was trained for that specific scenario only, where they began with few agents and increased the complexity of the situation by time. Interestingly the hallway scenario differs quite significantly as the learning curve only rises up late at ~45-50 thousand iterations, see Fig. \ref{fig:aiPerformance}.
+
+After that they also run tests for a generalizing DNN that works for all scenarios. To do that they randomly selected different scenarios, preferring easier ones at the beginning. Their results show that a generalizing DNN can perform equally than an specially prepared for that scenario one. 
+
+For conclusion that approach looks promising as this requires relatively low effort in preparing the data compared to data-driven system and still don't rely on any explicitly set behaviours. However the resulting simulation looks visually appealing but there was no validation if the resulting behaviour is also present in real world crowds. As for future work they suggested to combine an ai-driven microscopic process with an multi-agent reinforcement learning one, to gain the benefits from an macroscopic model. This would mean to adapt the reward function on multiple agents instead of treating each agent separately.  
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=1\linewidth]{images/aiSituations.png}
+  \caption{Results of different simulation scenarios, (a) Obstacle (b) Hallway (c) Crossway (d)Circle  Graphs for specifics scenarios, taken from \cite{lee_crowd_2018}.
+  }
+  \Description{Results for different simulation scenarios}
+  \label{fig:aiScenarios}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=1\linewidth]{images/aiPerformance.png}
+  \caption{Performance Graphs for specifics scenarios, taken from \cite{lee_crowd_2018}.
+  }
+  \Description{Performance Graphs for specifics scenarios}
+  \label{fig:aiPerformance}
+\end{figure}
+
+
 
 %%
 %% The acknowledgments section is defined using the "acks" environment
