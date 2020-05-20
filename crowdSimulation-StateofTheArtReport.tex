@@ -168,31 +168,29 @@ In the Introduction the research procedure, the two key areas, simulation models
 
 A good comprehensive work on crowd simulation is the book "Crowd Simulation" \cite{thalmann_crowd_2013} in the introduction part I will sum up some key aspects. 
 
-The research results in crowd simulation does not come from one or two specific scientific fields or communities, rather the results is a combination of many different fields. A big part comes from the computer graphics field but there is also research done in architecture, physics, robotics, safety science and sociology because these face similar problem. A resulting problem is that it is difficult to keep up to date with the current research, maybe overlook some new important papers on different fields and miss useful information for the own research. In addition most papers are presenting an solution for a specific problem or use case, for example a pedestrian simulation in real time \cite{karamouzas_predictive_2009},which is not very useful when you want to simulate a big fighting scene in a movie.
+The research results in crowd simulation does not come from one or two specific scientific fields or communities, rather the results is a combination of many different fields. A big part comes from the computer graphics field but there is also research done in architecture, physics, robotics, safety science and sociology as these face similar problem. A resulting problem is that it is difficult to keep up to date with the current research, maybe overlook some new important papers on different fields and miss useful information for the own research. In addition most papers are presenting an solution for a domain specific problem or use case, for example a pedestrian simulation in real time \cite{karamouzas_predictive_2009},which is not very useful when you want to simulate a big fighting scene in a movie.
 
 \subsection{Key areas}
 \label{chap:key_areas}
-For a believable crowd simulation there are two parts. First we need to have \textbf{an realistic crowd behavior model, animation and environment modeling"} which defines how the crowd is moving and reacting to each other and the environment. Some example research papers here are for example "Flocks, herds and schools: A distributed behavioral model"\cite{reynolds_flocks_1987} or "Social force model for pedestrian dynamics"\cite{helbing_social_1995}. Second we also need \textbf{crowd rendering} for displaying the large amount of simulated persons in the crowd in a convincing manner with matching animations, where performance is especially important in real time simulations. Here an example is "Geopostors: a real-time geometry / impostor crowd rendering system"\cite{lee_crowd_2018}. Both areas are important as a they depend on each other to deliver an credible crowd simulation.
+For a believable crowd simulation there are two parts. First we need to have \textbf{an realistic crowd behavior model, animation and environment modeling} which defines how the crowd is moving and reacting to each other and the environment. Some example research papers here are for example "Flocks, herds and schools: A distributed behavioral model"\cite{reynolds_flocks_1987} or "Social force model for pedestrian dynamics"\cite{helbing_social_1995}. Second we also need \textbf{crowd rendering} for displaying the large amount of simulated persons in the crowd in a convincing manner with matching animations, where performance is especially important in real time simulations. Here an example is "Geopostors: a real-time geometry / impostor crowd rendering system"\cite{lee_crowd_2018}. Both areas are important as a they depend on each other to deliver an credible crowd simulation.
 
 Most application on crowd simulation focus on one of two key areas: 
 \begin{itemize}
 \item \textbf{Realism of behavioural simulation:} The focus is to reproduce real crowds as close as possible. Crowd dynamics, movement, collision avoidance, independent decisions and simulation result evaluation are some keywords in this area. Example applications would be pedestrian and traffic simulation in urban areas especially at evacuation scenarios or big events or public buildings.
-\item \textbf{High quality rendering:} Here the focus lies on producing stunning videos with crowd simulation components, the behavior of the crowd should not always match reality here instead the animator decide based on creative decisions. Example applications are found in the form of plugins for 3D graphic software like "Autodesk Maya" or "Blender", libraries in pc or console games and finally as proprietary render engines and tools for movie blockbusters.
+\item \textbf{High quality rendering:} Here the focus lies on producing stunning videos with crowd simulation components, the behavior of the crowd should not always match reality instead the animator decides based on creative decisions. Example applications are found in the form of plugins for 3D graphic software like "Autodesk Maya" or "Blender", libraries in pc or console games and finally as proprietary render engines and tools for movie blockbusters.
 \end{itemize}
 
 \cite{thalmann_crowd_2013}
 
 \subsection{Simulation Models}
 \label{chap:simulationModels}
-To simulate realistic crowd behavior a model is needed which specifies how the crowd reacts in each simulation step. The used models can be classified in roughly two groups macroscopic and microscopic models. The difference is how they see an agent in a crowd. An \textbf{agent} is a single actor in a crowd simulation which can move and act independently from other agents, this can be a human in a crowd of people but also a car in a traffic simulation. However on some applications and paper especially those who handle real time simulations agents are grouped to reduce the simulation cost and only rendered as multiple agents / persons, an example are the "TotalWar" \cite{total_war_website} \cite{thalmann_crowd_2013} game series.
+To simulate realistic crowd behavior a model is needed which specifies how the crowd reacts in each simulation step. The used models can be classified in roughly two groups macroscopic and microscopic models. The difference is how they see an agent in a crowd. An \textbf{agent} is a single actor in a crowd simulation which can move and act independently from other agents, this can be a human in a crowd of people but also a car in a traffic simulation. However on some applications and paper especially those who handle real time simulations agents are grouped to reduce the simulation cost and only rendered as multiple agents / persons, an example are the "TotalWar" \cite{total_war_website} game series.
 
 \subsubsection{\textbf{macroscopic models}}
 These types of models try to simulate the crowd as an whole unit, they are often used in a real-time scenario because the number of individual agents in the crowd does not highly affect performance in the simulation. In some papers they are also referred as "continuum-based"\cite{xu_crowd_2014}. The goal here is that the crowd as a whole reacts realistically. These simulation can be compared to gas or fluid simulations, because there is not each particle or in our case each agent simulated moreover there is a common path for the fluid or whole crowd simulated. An example are the pedestrian and crowd simulation papers from Hudges \cite{hughes_continuum_2002} \cite{hughes_flow_2003}
 
 \subsubsection{\textbf{microscopic models}} \label{def:microscopic models}
-On the other hand microscopic models, also referred as "agent-based"\cite{xu_crowd_2014} try to simulate each single agent. The resulting simulation often brings better results than a simulation with a macroscopic model but it also costs more performance, so it is not suitable for simulating large crowds in real time. Most approaches define rules for each agent how to react to the environment and different scenarios. There is a lot of different papers and approaches which rules and attributes provide what results. A common used approach is force-based, famous cited papers are "Social force model for pedestrian dynamics" \cite{helbing_social_1995} and "Flocks, herds and schools: A distributed behavioral model" \cite{reynolds_flocks_1987}. 
-
-\cite{xu_crowd_2014}\cite{thalmann_crowd_2013}
+On the other hand microscopic models, also referred as "agent-based"\cite{xu_crowd_2014} try to simulate each single agent. The resulting simulation often brings better results than a simulation with a macroscopic model but it also costs more performance, so it is not suitable for simulating large crowds in real time. Most approaches define rules for each agent on how to react to the environment and different scenarios. There is a lot of different papers and approaches which rules and attributes provide what results. A common used approach is force-based, famous cited papers are "Social force model for pedestrian dynamics" \cite{helbing_social_1995} and "Flocks, herds and schools: A distributed behavioral model" \cite{reynolds_flocks_1987}. 
 
 \subsection{elementary papers}
 \label{chapter:elementaryPapers}
@@ -284,7 +282,6 @@ On the example of the movie "World War Z" we can also see that the simulations a
 
 An other commercial software for CGI crowds is "Golaem" \cite{golaem_website}. This software can be purchased for individual projects and is therefore used for movies with a smaller budget, commercials or other short CGI clips in need for crowds, which can't afford to develop an own software tool, but it is also used for big budget production of example in "Game of Thrones" \cite{golaem_got_vid}
 
-\cite{thalmann_crowd_2013}
 \subsubsection{Games}
 
 As games and other interactive media are real-time simulations they have limited capabilities for costly simulations, so crowd simulations are not so common in today's games. One game genre that uses them are real-time strategy games like Total War \cite{total_war_website}, where the crowd simulation can also have an effect on the gameplay and not only used to render visually appealing large crowds. 
@@ -337,7 +334,7 @@ A often used approach is the use of an animation database, that is precalculated
 
 \subsection{Interaction with virtual crowds}
 
-Another area is researching how information from real crowds could be used to optimize the crowd behavior for the virtual crowds. In the basic form people are observing real crowds and evaluate these results empirical to detect common patterns. These found patterns are later tried to generalise in the form of individual, group and sociological aspects which can be implemented in the behaviour models of applications to provide accurate representation of the real world. To the individual aspects count behavior as personal/individual space and communication between individuals. Social conventions, group formation and leader selection are examples for group aspects. Sociological aspects describe behavior between a group and individuals, polarization, domination and the loss of individuality's are some examples.  
+Another area is researching how information from real crowds could be used to optimize the crowd behavior for the virtual crowds. In the basic form people are observing real crowds and evaluate these results empirical to detect common patterns. These found patterns are later tried to generalize in the form of individual, group and sociological aspects which can be implemented in the behaviour models of applications to provide accurate representation of the real world. To the individual aspects count behavior as personal/individual space and communication between individuals. Social conventions, group formation and leader selection are examples for group aspects. Sociological aspects describe behavior between a group and individuals, polarization, domination and the loss of individuality's are some examples.  
 
 In addition the automatic information gathering using computer vision is also part of this research field. The benefit of using these techniques is that first it is way less time consuming than manual observation and second that the infrastructure needed is quite cheap and often already available in the form of security cameras on public places. The information extraction is not just limited to person movement, a simple motion capture for the use in animation is also possible or detection of events and their reactions, for example the persons reaction when an train is entering the platform. One example pipeline \cite{thalmann_crowd_2013} presented could be 1) extract trajectory for every person 2) group trajectories into "motion clusters" 3) compute an velocity field for each cluster 4) use these velocity fields in the virtual crowd simulation. 
 
@@ -420,7 +417,7 @@ The method they use does not explicitly check for collision instead it tries to 
 
 \subsubsection{model overview}
 
-The model is based on research from Cutting "How we avoid collisions with stationary and moving objects"(TODO cite), his results on how humans avoid collisions can be broken down to two questions: 
+The model is based on research from Cutting "How we avoid collisions with stationary and moving objects", his results on how humans avoid collisions can be broken down to two questions: 
 \begin{itemize}
 \item Will a collision occur? This is decided by an angle to the obstacle named the bearing angle $\alpha$ . When the derivative of the angle \textbf{\.{$\alpha$}} is zero a collision will occur. Fig\ref{fig:visualBearingangle} visualized the bearing angle and when a collision occurs.
 \item When will a collision occur? Using the rate-of-growth for obstacles humans can estimate the \textbf{time-to-collision (ttc)}
@@ -432,7 +429,7 @@ The model is based on research from Cutting "How we avoid collisions with statio
   \Description{bearing angle}
   \label{fig:visualBearingangle}
 \end{figure}
-The paper changes the use of time-to-collision to time-to-interaction tti, so the time needed before the two participants get closest to another this can be a collision or a just a walk by. So in conclusion the information when and where two agents get the closest to another and if a collision will occur can be described by the pair (\.{$\alpha$}, tti). As a general rule of thumb, turning changes \.{$\alpha$} and deceleration changes tti. 
+The paper changes the use of time-to-collision to time-to-interaction tti, so the time needed before the two participants get closest to another this can be a collision or just a walk by. So in conclusion the information when and where two agents get the closest to another and if a collision will occur can be described by the pair (\.{$\alpha$}, tti). As a general rule of thumb, turning changes \.{$\alpha$} and deceleration changes tti. 
 
 \subsubsection{implementation of steering and collision avoidance} A simplified version for the algorithm can described as following (for every agent):
 \begin{enumerate}
@@ -468,7 +465,7 @@ They achieve this by taking the agents and assign them to different groups. As a
 Each level has a different complexity and assigned tasks / calculations. 
 The simplest level is the agent level where only a small amount of the movement decisions are made, collision avoidance in the local area is one of them as this can't be done at the group level.
 The most influential level is that of the group, here is the most knowledge saved and complex decisions are made, for example path planning.
-At the crowd level only information relevant for all groups are stored and processed, foe example interest points of the scene.
+At the crowd level only information relevant for all groups are stored and processed, for example interest points of the scene.
 The information flow is mostly top to bottom so crowd$\rightarrow$group$\rightarrow$individual.
 This separation of levels and complexity allows the system to reduce the number complex tasks and reuse information for multiple individuals at a group level. The simulations gains an huge performance benefit while keeping most of the realistic behaviour of a pure microscopic model. 
 \subsubsection{combination of autonomous and scripted behaviour}
@@ -503,7 +500,7 @@ Fig. \ref{fig:hierarchicalarchitectureOverview} shows an overview of the complet
 "Crowds by Example" \cite{lerner_crowds_2007} have a completely different approach than other crowd simulation models. They simulate a crowd without the need for socials rules or agents perception, the system only relies on given input data in the form of videos from real world crowds.
 However there are multiple restriction and assumptions, first they only focus on providing a mechanism for the steering aspect of agents and second the agents does not have a specific goal like reaching an point of interest.
 
-The basic idea is to create a database of the steering behaviour agent in crowds have based on a given input of videos. At simulation time the system analyses the current situation and searches for a similar pattern in the database, then apply the steering behaviour of real human in the database to the agent in the simulation. The advantages of this method are: 
+The basic idea is to create a database of the steering behaviour agent in crowds have, based on a given input of videos. At simulation time the system analyses the current situation and searches for a similar pattern in the database, then apply the steering behaviour of real human in the database to the agent in the simulation. The advantages of this method are: 
 \begin{itemize}
     \item The resulting animation offers a big diversity of steering behaviour which results in a better visual appealing simulation.
     \item Because there are no explicit rules or assumptions about the crowd behavior the simulation is only dependent on the input data. This means that the system is not domain specific and can be adapted to different use cases by changing the input data.
@@ -555,7 +552,7 @@ To get input data for the reinforcement learning they use visual sensors which a
 \subsubsection{results}
 To test their system they run tests with 4 different scenarios, see Fig. \ref{fig:aiScenarios}. In a first step the system was trained for that specific scenario only, where they began with few agents and increased the complexity of the situation by time. Interestingly the hallway scenario differs quite significantly as the learning curve only rises up late at ~45-50 thousand iterations, see Fig. \ref{fig:aiPerformance}.
 
-After that they also run tests for a generalizing DNN that works for all scenarios. To do that they randomly selected different scenarios, preferring easier ones at the beginning. Their results show that a generalizing DNN can perform equally than an specially prepared for that scenario one. 
+After that they also run tests for a generalizing DNN that works for all scenarios. To do that they randomly selected different scenarios, preferring easier ones at the beginning. Their results show that a generalizing DNN can perform equally as an specially prepared for that scenario one. 
 
 For conclusion that approach looks promising as this requires relatively low effort in preparing the data compared to data-driven system and still don't rely on any explicitly set behaviours. However the resulting simulation looks visually appealing but there was no validation if the resulting behaviour is also present in real world crowds. As for future work they suggested to combine an ai-driven microscopic process with an multi-agent reinforcement learning one, to gain the benefits from an macroscopic model. This would mean to adapt the reward function on multiple agents instead of treating each agent separately.  
 
