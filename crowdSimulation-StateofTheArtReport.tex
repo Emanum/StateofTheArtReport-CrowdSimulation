@@ -122,7 +122,7 @@ On the other hand microscopic models, also referred as "agent-based"\cite{xu_cro
 \label{chapter:elementaryPapers}
 In the following section i want to sum up some often cited and elementary papers for crowd simulation. 
 \subsubsection{Flocks, herds, and schools: A distributed behavioral model.}\cite{reynolds_flocks_1987}
-is one of the most famous, first published papers for the field. The paper describes an approach for modeling a simulation of a flock of birds and other crowds. When it was written the common way to simulate a crowd was to script the path of each agent individually. Reynolds defined some key concepts and keywords for the crowd simulation field for example he introduced the idea of what later would become known as agend-based or microscopic simulation:
+Is one of the most famous, first published papers for the field. The paper describes an approach for modeling a simulation of a flock of birds and other crowds. When it was written the common way to simulate a crowd was to script the path of each agent individually. Reynolds defined some key concepts and keywords for the crowd simulation field for example he introduced the idea of what later would become known as agend-based or microscopic simulation:
 \begin{quote}
 "Yet all evidence indicates that flock motion must be merely the aggregate result of the actions of individual animals, each acting solely on the basis of its own local perception of the world. (...) This approach assumes a flock is simply the result of the interaction between the behaviors of individual birds. To simulate a flock we simulate the behavior of an individual bird (...)"
 \end{quote}
@@ -139,7 +139,7 @@ The reason for this is that the birds do not include all other individual birds 
 
 The paper continues with more information about the aspects of what to consider when rendering crowds with the example of a bird flock and other animal crowds. Many of these aspects and problems are still relevant in current papers. That is the reason why this is an important elementary paper in the crowd simulation field. However when it comes to details in the implementation of the algorithm there are more up to date approaches. 
 
-\subsubsection{Social force model for pedestrian dynamics}\cite{helbing_social_1995} is an important paper when it comes to pedestrian simulation for common daily tasks. These crowd flow simulations are used in the architectural field during the planning state for large buildings, train station, airports, shopping centers etc. 
+\subsubsection{Social force model for pedestrian dynamics}\cite{helbing_social_1995} Is an important paper when it comes to pedestrian simulation for common daily tasks. These crowd flow simulations are used in the architectural field during the planning state for large buildings, train station, airports, shopping centers etc. 
 \begin{figure}[h]
   \centering
   \includegraphics[width=1\linewidth]{images/helbingSocialForceConceptScheme.png}
@@ -484,20 +484,20 @@ After that they also ran tests for a generalizing DNN that works for all scenari
 
 In conclusion that approach looks promising, as this requires relatively low effort in preparing the data compared to data-driven system, and still doesn't rely on any explicitly set behaviours. However, while the resulting simulation looks visually appealing but there was no validation if the resulting behaviour is also present in real world crowds. As for future work, they suggested to combine an ai-driven microscopic process with a multi-agent reinforcement learning one to gain the benefits of a macroscopic model. This would mean to adapt the reward function on multiple agents instead of treating each agent separately.  
 
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=1\linewidth]{images/aiPerformance.png}
+  \caption{Performance Graphs for specifics scenarios, taken from \protect\cite{lee_crowd_2018}.}
+  %Description{Performance Graphs for specifics scenarios}
+  \label{fig:aiPerformance}
+\end{figure}
+
 \begin{figure}[h]
   \centering
   \includegraphics[width=1\linewidth]{images/aiSituations.png}
   \caption{Results of different simulation scenarios, (a) Obstacle (b) Hallway (c) Crossway (d)Circle  Graphs for specifics scenarios, taken from \protect\cite{lee_crowd_2018}.}
   %Description{Results for different simulation scenarios}
   \label{fig:aiScenarios}
-\end{figure}
-
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=1\linewidth]{images/aiPerformance.png}
-  \caption{Performance Graphs for specifics scenarios, taken from \protect\cite{lee_crowd_2018}.}
-  %Description{Performance Graphs for specifics scenarios}
-  \label{fig:aiPerformance}
 \end{figure}
 
 \bibliographystyle{acmsiggraph}
