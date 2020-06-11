@@ -112,55 +112,44 @@ To simulate realistic crowd behavior a model is needed that specifies how the cr
 These types of models try to simulate the crowd as a whole unit. They are often used in a real-time scenario because the number of individual agents in the crowd does not highly affect performance in the simulation. In some papers they are also referred as "continuum-based"\cite{xu_crowd_2014}. The goal here is that the crowd as a whole reacts realistically. These simulations can be compared to gas or fluid simulations because not each particle, or in our case each agent, is simulated. Moreover a common path for the fluid or whole crowd is simulated. An example are the pedestrian and crowd simulation papers from Hudges \cite{hughes_continuum_2002} \cite{hughes_flow_2003}
 
 \subsubsection{\textbf{Microscopic models}} \label{def:microscopic models}
-On the other hand microscopic models, also referred as "agent-based"\cite{xu_crowd_2014}, try to simulate each single agent. The resulting simulation often brings better results than a simulation with a macroscopic model but it also costs more performance, so it is not suitable for simulating large crowds in real time. Most approaches define rules for each agent on how to react to the environment and different scenarios. There is a lot of different papers and approaches to which rules and attributes provide what results. A common used approach is force-based, see Section \ref{chapter:elementaryPapers} for examples.
+On the other hand microscopic models, also referred as "agent-based"\cite{xu_crowd_2014}, try to simulate each single agent. The resulting simulation often brings better results than a simulation with a macroscopic model but it also costs more performance, so it is not suitable for simulating large crowds in real time. Most approaches define rules for each agent on how to react to the environment and different scenarios. There is a lot of different papers and approaches to which rules and attributes provide what results. A common used approach are force-based simulations, see Section \ref{chapter:elementaryPapers} for examples.
 
-\subsection{Elementary papers}
+\section{Elementary papers}
 \label{chapter:elementaryPapers}
 In the following section i want to sum up some often cited and elementary papers for crowd simulation.
-\subsubsection{title TODO}
+\subsection{Beginnings of crowd simulation research}
 
-\cite{reynolds_flocks_1987}
-Is one of the most famous, first published papers for the crowd simulation field. The paper describes an approach for modeling a simulation of a flock of birds and other crowds. When it was written the common way to simulate a crowd was to script the path of each agent individually. Reynolds defined some key concepts and keywords for the crowd simulation field for example he introduced the idea of what later would become known as agend-based or microscopic simulation: The authors figured out that, the movement of the crowd (flock) is just the aggregation of the movement from its individual agents (birds), so to simulate a complete crowd we have to simulate each individual agent.
-The term \textbf{agent} or \textbf{actor} is used for abstracting a state,process and procedure into one unit, this concept is used in most microscopic simulation approaches today. The difference between the author's simulation and a common particle system is that, the agents have a more complex state and behavior that a simple particle.
+Reynolds \shortcite{reynolds_flocks_1987} wrote one of the most famous, first published papers for the crowd simulation field . The paper describes an approach for modeling a simulation of a flock of birds and other crowds. When it was written the common way to simulate a crowd was to script the path of each agent individually. Reynolds defined some key concepts and keywords for the crowd simulation field for example he introduced the idea of what later would become known as agend-based or microscopic simulation: The authors figured out that, the movement of the crowd (flock) is just the aggregation of the movement from its individual agents (birds), so to simulate a complete crowd we have to simulate each individual agent.
+The term \textbf{agent} or \textbf{actor} is used for abstracting a state, process and procedure into one unit, this concept is used in most microscopic simulation approaches today. The difference between the author's simulation and a common particle system is that, the agents have a more complex state and behavior that a simple particle.
 The authors also compare their approach to a particle system for simulating dynamic "fuzzy objects", but the differences in their approach is that each particle/bird has a complex geometrical state (orientation; animation for example flight banking) and that a bird flock is more complex to describe than other particle systems like for example a fire. In addition basic particle systems do not simulate the interaction between the particles.
 
 The authors also use a system which allow them to increase the number of individual agents. The key concept is to use a level of detail approach, in their case they only use information of the individual agent and other agents nearby. This level of detail is also used by a recent paper \cite{osullivan_levels_2002}. The authors picked up the research from Reynolds and extended it. The increased performance comes from level of details on the geometry, motion and behavior.
 
-\subsubsection{Social force model for pedestrian dynamics}\cite{helbing_social_1995} Is an important paper when it comes to pedestrian simulation for common daily tasks. These crowd flow simulations are used in the architectural field during the planning state for large buildings, train station, airports, shopping centers etc. 
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=1\linewidth]{images/helbingSocialForceConceptScheme.png}
-  \caption{sequence of actions in the social force concept, taken from \protect\cite{helbing_social_1995}}
+\subsection{human crowd behavior}
+ To begin simulation large human crowds, we first need to understand the behavior of human crowds in general. An important paper, when it comes to human crowd behaviour for common daily tasks, is written by Helbing and Molnár \shortcite{helbing_social_1995}. 
+ The results of this research is used in architectural application today, they support the planning of large buildings, train station, airports, etc.
+The main concept states back to research done by Lewin \shortcite{lewin_field_1951}, which says that there is an sequence of actions for the social force concept: The so called Stimulus, this can an perceived event for example, is triggering the next step which called psychological and mental process. The goal of this process is to produce an decision. This decision triggers the final step, the reaction, here an action is performed by the human, for example avoiding a collision.
+%\begin{figure}[h]
+%  \centering
+%  \includegraphics[width=1\linewidth]{images/helbingSocialForceConceptScheme.png}
+%  \caption{sequence of actions in the social force concept, taken from \protect\cite{helbing_social_1995}}
   %\Description{sequence of actions in the social force concept}
-  \label{fig:helbingSchema}
-\end{figure}
-Fig. \ref{fig:helbingSchema} shows the sequence of actions leading to an action for an individual crowd agent based on research done by Lewin \cite{lewin_field_1951}. The Stimulus, shown in Fig. \ref{fig:helbingSchema}, is used as a trigger like someone blocking the way for instance. This results in the process of handling the situation which creates a motivation to act and in the final form a reaction that is carried out. While this concept can be applied to all situations, Helbing however describes a model for common situations which are decided usually automatically and intuitively by the person. The idea is to describe the pedestrian movement indirectly through describing the external forces which affect the agent. 
-Helbing's social force model uses 3 main effects for the model:
+%  \label{fig:helbingSchema}
+%\end{figure}
+%Fig. \ref{fig:helbingSchema} shows the sequence of actions leading to an action for an individual crowd agent based on research done by Lewin \cite{lewin_field_1951}. The Stimulus, shown in Fig. \ref{fig:helbingSchema}, is used as a trigger like someone blocking the way for instance. This results in the process of handling the situation which creates a motivation to act and in the final form a reaction that is carried out. 
+The social force model, Helbing describes in his paper, use the concept of Lewin and extends it to an crowd simulation. He does this by modelling the movement of individual agents, so we have a classic microscopic approach here, by different forces which either pull or push the humans in different directions. There are three main effects: 
 \begin{enumerate}
     \item the goal for the person is to reach some sort of target destination as easily as possible, usually the fastest route.
     \item "repulsive effect": the pedestrian wants to "keep a certain distance from other pedestrians that depends on the pedestrian density and the desired speed". In addition the pedestrian also wants to keep distance to borders.  
     \item "attracted effect": the pedestrians are sometimes attracted by other persons (friends, street artists, etc.) or objects (e.g., window displays)."
 \end{enumerate}
-In the paper all effects are described in detail with mathematical equations which are not displayed here for reasons of clarity. The resulting movement decision is the sum of all effects plus a fluctuation term for situations where two alternatives are rated equally. Simulations with this model show:
-\begin{quote}
-    "(i) the development of lanes consisting of pedestrians who walk into the same direction and (ii) oscillatory changes of the walking direction at narrow passages."
-\end{quote}
-This behaviour can also be observed in real world scenarios. 
+Some simulation results show the development of lanes of pedestrians and oscillatory changes of walking direction at narrow choke points. The authors state that these behaviors can also be seen in real world scenarios. 
 
-\subsubsection{Simulating dynamical features of escape panic}\cite{helbing_simulating_2000} At the same time there is also a need for simulating pedestrians in a panic situation, a common example being evacuation simulations.
-There are a number of reasons for a panic reaction in a crowd: unexpected actions like a loud gun shot or a fire are common reasons most people would think about. But also expected situations like the race for a limited amount of resources (tickets, seats, toilet paper during the COVID-19 pandemic)  and even situations without any cause at all can cause a crowd panic. These panic reactions often lead to tragic events and cause harm to people as seen for example in the panic at the loveparade 2010. These events also show that the reaction of the individual agent is way more complex in a panic situation than under normal circumstances. This, of course, makes the development for a crowd behavioural model difficult. In addition the paper also states that there is not enough suitable data to test their panic model as they obviously can't simply produce a panic in the real world. 
+Beside a normal crowd behavior, there is also panic behavior which is more complex and difficult to simulate. There are a number of reasons for a panic reaction in a crowd: From unexpected actions like a loud gun shot to expected situations like the rush for limited seats, tickets or toilet paper during the COVID-19 pandemic. Even situations without any cause at all can cause a crowd panic. The loveparade 2010 shows us crowd panic often lead to tragic events and cause harm to people, to prevent these events there is a need for simulating crowd panic behavior. 
+The paper \cite{helbing_simulating_2000} picks up this problem and presents an crowd simulation approach specifically for panic situations. The authors use the the "generalized force model" \cite{hindsley_investigation_1986} to construct their own panic behavior model. The difference to a normal model lies in the features of the model, some important of which are (1) People move faster than normal (2) People start pushing. By combining psychological and physical forces they archive believable results. Some of them are a "Transition to in-coordination due to clogging" and "Faster-is-slower effect due to impatience". 
+In their model they have a "panic parameter" \label{term:panicParameter} which allows to adjust the "amount" of panic in comparison to a normal daily situation. 
 
-The paper gives a definition of features of a panic situation, some of which are (1) People move faster than normal (2) People start pushing. The full list is described in the paper. They use these features to construct a behaviour model based on the "generalized force model"\cite{hindsley_investigation_1986}
-\begin{quote}
-"We assume a mixture of psychological and physical forces influencing the behaviour in a crowd"
-\end{quote}
-They also ran a number of different tests with the model, the results showing the following:
-\begin{itemize}
-\item "Transition to in-coordination due to clogging": In a situation where the crowd wants to exit an area trough a small gap the number of people leaving gets smaller when the velocity of the crowd increases.
-\item "Faster-is-slower effect due to impatience": Clogging can also appear when there is a wider gap in the escape route. 
-\item "Mass behaviour": Here the goal was to leave a room with smoke in it. Results showed that the quickest evacuation would be possible when there is an equal mixture of individualistic and herding behaviour. 
-\end{itemize}
-In their model they have a "panic parameter" \label{term:panicParameter} which allows to adjust the "amount" of panic in comparison to a normal daily situation. Because the results are also observed in real crowd panics their model is often used as a base for a number of other evacuation simulation papers. \cite{braun_simulating_2005} \cite{zheng_modeling_2009}
+This paper is often cited, one example is \cite{braun_simulating_2005}. Here the authors extend the research by adding a Finite State Machine to the simulation which allows them to control complex environments and hazard events in more detail. In Addition the authors also provide a mechanism to model the communication between individual agents. Helbing's work is also often compared to other simulation models, for example in the paper \cite{zheng_modeling_2009}. This paper also states that the social force model, for specific scenarios like finding a way throw traffic flow, is oversimplified in relation to the underlying assumptions to the model.
 
 \section{Application Areas}
 
