@@ -94,15 +94,51 @@ In the Introduction the research procedure, the two key areas, simulation models
 
 The research results in crowd simulation do not come from one or two specific scientific fields or communities, but rather a combination of many different fields. A big part comes from the computer graphics field but there is also research done in architecture, physics, robotics, safety science and sociology as these face similar problems. A resulting problem is that it is difficult to keep up to date with the current research. One might overlook some new, important papers on different fields and miss useful information for one's own research. In addition, most papers are presenting a solution for a domain specific problem or use case, for example a pedestrian simulation in real time \cite{karamouzas_predictive_2009} which is not very useful when you want to simulate a big fighting scene in a movie.
 
-\subsection{Key areas}
+\subsection{Key areas and applications}
 \label{chap:key_areas}
 For a believable crowd simulation there are two parts. First, we need to have \textbf{a realistic crowd behavior model, animation and environment modeling} which defines how the crowd is moving and reacting to each other and the environment. Second, we also need \textbf{crowd rendering} for displaying the large amount of simulated persons in the crowd in a convincing manner with matching animations, where render performance is especially important in real time simulations. Both areas are important as a they depend on each other to deliver a credible crowd simulation.
 
-Most applications of crowd simulation focus on one of two key areas: 
-\begin{itemize}
-\item \textbf{Realism of behavioural simulation:} The focus is to reproduce real crowds as close as possible. Crowd dynamics, movement, collision avoidance, independent decisions and simulation result evaluation are some keywords in this area. Example applications would be pedestrian and traffic simulation in urban areas especially in evacuation scenarios, at big events or in public buildings.
-\item \textbf{High quality rendering:} Here, the focus lies on producing stunning videos with crowd simulation components. The behavior of the crowd should not always match reality. Instead the animator decides based on creative decisions. Example applications are found in the form of plugins for 3D graphic software like "Autodesk Maya" or "Blender", libraries in pc or console games and finally as proprietary render engines and tools for movie blockbusters.
-\end{itemize}
+The applications mostly can be separated into two key areas:
+
+\subsubsection{Realism focused simulation}
+The focus is to reproduce real crowds as close as possible. Crowd dynamics, movement, collision avoidance, independent decisions and simulation result evaluation are some keywords in this area. 
+%Example applications would be pedestrian and traffic simulation in urban areas especially in evacuation scenarios, at big events or in public buildings.
+
+Pedestrian and traffic simulation plays a big role, as these are used to simulate large urban areas. There are a number of commercially available software for similar use-cases like simulating the crowd flow at events, in public transport buildings, airports and even cruise ships and whole city districts. They often come with extended features that go beyond the crowd simulation like heat-maps, smoke simulation, integration for 3D models and other CAD applications, recording and playback. The customers for these applications are public transport companies, architectural offices, event organizers and the public governance sector. The simulation allows them to reduce costs in the planning phase and optimize their infrastructure. Simulation of the evacuation times required is also a market for these applications. Some example applications are "Pedestrian Dynamics®" \cite{pedestrian_dynamics_pedestrian_2020}, "MassMotion"  \cite{mediaworks_pedestrian_2020} which can be seen in Fig. \ref{fig:teaser} and "Anylogic" \cite{anylogic_website}
+
+%\begin{figure}[h]
+%  \centering
+%  \includegraphics[width=1\linewidth]{images/PedestrianDynamicsStadionExample.png}
+%  \caption{example visualization of pedestrian flow in the commercial software "Pedestrian Dynamics®",  taken from \protect\cite{pedestrian_dynamics_pedestrian_2020}}
+  %\Description{example visualization of a pedestrian flow in a stadium}
+%  \label{fig:stadionEvacuationExample}
+%\end{figure}
+
+%Although the visual presentation is not the focus of these applications it does not necessarily have to look basic. As some of the introduced commercial tools also have export functions for the generated behaviour, especially the movement, these exports can then be used later to produce visually appealing videos in 3D applications like "3ds Max" as a demo of Jordan Lynam shows us. \cite{lynamJordan_viissim_3ds_max}
+
+\subsubsection{High quality focused simulation}
+Here the focus lies on producing stunning videos with crowd simulation components. The behavior of the crowd should not always match reality. Instead the animator decides based on creative decisions. Example applications are found in the form of plugins for 3D graphic software like "Autodesk Maya" or "Blender", libraries in pc or console games and finally as proprietary render engines and tools for movie blockbusters.
+
+Publicly available applications and research, on high quality focused simulation, are rare and hard to find. The reason for this is these, especially the applications used for movies, are highly proprietary and not published. Most of the time information is only available in the form of making-of documentaries, interviews and CGI trailers. 
+However, the foundation these applications are based on is usually publicly available in the form of scientific papers. The challenges these applications are confronted with are strongly influenced by the crowd rendering research field, especially in games as these require real-time simulations %\cite{thalmann_crowd_2013}.
+
+\paragraph{Movies}
+
+There are multiple benefits of crowd simulation for movies and other types of creative video content. A nearly endless amount of possible scenes and shots can be created, for example a huge battle or a populated city. Some scenes would just not be possible to be animated manually with CGI not to mention hiring an amount of actors and actually filming it. In comparison to the realism focused applications, simulations for movies does not have the strong urge of proper continuous crowd behavior, as movies are grouped in shots where the viewer often doesn't see the same part of the crowd for a longer period of time. Lastly, creative content obviously doesn't always want realistically behaving crowds. Animators see crowd simulation more as a tool for controlling large crowds, so the research field for manipulation of crowds is also an important aspect on movie crowd simulation,  examples are \cite{kim_interactive_2014} \cite{ulicny_crowdbrush_2004}
+
+In the recent movie "THE HOBBIT: Battle of Five Armies" there were  two types of crowd simulation tools used. "Massive", one of the most advanced non-real-time simulation tools \cite{massive_website} for rendering the final scenes in post production, which at this scale requires render farms to run for weeks or even months to finish. Therefore a second tool, "army-manager" was used earlier in the production, as this could render much faster and allowed the visual effects team to plan their shots and get a draft of the final simulated crowd. \cite{wired_hobbit_doku}
+
+On the example of the movie "World War Z" we can also see that the simulations are often combined with a database of motion captures scenes. We already saw that approach in some literature \cite{thalmann_crowd_2013}, and rigid body physics. In addition the "Alice" program, which is used to simulate the zombie crowds, uses a microscopic based model where each agent is simulated by given rules and attributes, which we already know from a lot of papers. \cite{wired_worldwarz_doku} 
+
+%An other commercial software for CGI crowds is "Golaem" \cite{golaem_website}. This software can be purchased for individual projects and is therefore used for movies with a smaller budget, commercials or other short CGI clips in need for crowds, that can't afford to develop their own software tool, but it is also used for big budget productions for example in "Game of Thrones" \cite{golaem_got_vid}
+
+\paragraph{Games}
+
+As games and other interactive media are real-time simulations they have limited capabilities for costly simulations, so crowd simulations are not so common in today's games. One game genre that uses them are real-time strategy games like Total War \cite{total_war_website}, where the crowd simulation can also have an effect on gameplay and is not only used to render visually appealing large crowds. 
+Many approaches for real time simulation are using the common LOD (level of detail) technique for the rendering of the crowd and also for the simulation itself. However LOD is more complex when used on the actual crowd behaviour simulation than on the crowd rendering itself. There is always the danger of getting a wrongly simulated world when the simulation detail level is too low. Another commonly used trick is to render one simulated agent as multiple persons to simulate a crowd. Lastly, as games are usually run on a powerful GPU, real time crowd simulation can also benefit from that, especially the rendering part is well manageable by the GPU.
+
+An example of what can be done with various optimization is "Ultimate Epic Battle Simulator" \cite{ultimeEpicBattleSim_video} , which is basically a big real-time crowd simulation sandbox. They manage to simulate path tracing on up to ten thousands of individual soldiers in real time. Sadly as it is proprietary there is not much detailed information, besides that they are using a highly optimized version of A* path tracing \label{term:A*Usage} with a shared memory, publicly available. 
+This example shows that crowd simulation at games can significantly impact gameplay, but requires a lot of optimization for a reasonable performance.
 
 \subsection{Simulation Models}
 \label{chap:simulationModels}
@@ -114,9 +150,9 @@ These types of models try to simulate the crowd as a whole unit. They are often 
 \subsubsection{\textbf{Microscopic models}} \label{def:microscopic models}
 On the other hand microscopic models, also referred as "agent-based"\cite{xu_crowd_2014}, try to simulate each single agent. The resulting simulation often brings better results than a simulation with a macroscopic model but it also costs more performance, so it is not suitable for simulating large crowds in real time. Most approaches define rules for each agent on how to react to the environment and different scenarios. There is a lot of different papers and approaches to which rules and attributes provide what results. A common used approach are force-based simulations, see Section \ref{chapter:elementaryPapers} for examples.
 
-\section{Elementary papers}
+\section{Elementary aspects and research}
 \label{chapter:elementaryPapers}
-In the following section i want to sum up some often cited and elementary papers for crowd simulation.
+In the following section i want to sum up some often cited and elementary papers, which build the base for the crowd simulation field.
 \subsection{Beginnings of crowd simulation research}
 
 Reynolds \shortcite{reynolds_flocks_1987} wrote one of the most famous, first published papers for the crowd simulation field . The paper describes an approach for modeling a simulation of a flock of birds and other crowds. When it was written the common way to simulate a crowd was to script the path of each agent individually. Reynolds defined some key concepts and keywords for the crowd simulation field for example he introduced the idea of what later would become known as agend-based or microscopic simulation: The authors figured out that, the movement of the crowd (flock) is just the aggregation of the movement from its individual agents (birds), so to simulate a complete crowd we have to simulate each individual agent.
@@ -150,48 +186,6 @@ The paper \cite{helbing_simulating_2000} picks up this problem and presents an c
 In their model they have a "panic parameter" \label{term:panicParameter} which allows to adjust the "amount" of panic in comparison to a normal daily situation. 
 
 This paper is often cited, one example is \cite{braun_simulating_2005}. Here the authors extend the research by adding a Finite State Machine to the simulation which allows them to control complex environments and hazard events in more detail. In Addition the authors also provide a mechanism to model the communication between individual agents. Helbing's work is also often compared to other simulation models, for example in the paper \cite{zheng_modeling_2009}. This paper also states that the social force model, for specific scenarios like finding a way throw traffic flow, is oversimplified in relation to the underlying assumptions to the model.
-
-\section{Application Areas}
-
-As the research field for crowd simulation is already widely spread over multiple science fields and communities the resulting application areas are of course too. The applications can be roughly grouped by the key areas mentioned before in Section \ref{chap:key_areas}. 
-
-\subsection{Realism focused simulation}
-
-In the area of realism focused simulation pedestrian and traffic simulation plays a big role, as these are used to simulate large urban areas. There are a number of commercially available software for similar use-cases like simulating the crowd flow at events, in public transport buildings, airports and even cruise ships and whole city districts. They often come with extended features that go beyond the crowd simulation like heat-maps, smoke simulation, integration for 3D models and other CAD applications, recording and playback. The customers for these applications are public transport companies, architectural offices, event organizers and the public governance sector. The simulation allows them to reduce costs in the planning phase and optimize their infrastructure. Simulation of the evacuation times required is also a market for these applications. Some example applications are "Pedestrian Dynamics®" \cite{pedestrian_dynamics_pedestrian_2020}, "MassMotion"  \cite{mediaworks_pedestrian_2020} and "Anylogic" \cite{anylogic_website}
-
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=1\linewidth]{images/PedestrianDynamicsStadionExample.png}
-  \caption{example visualization of pedestrian flow in the commercial software "Pedestrian Dynamics®",  taken from \protect\cite{pedestrian_dynamics_pedestrian_2020}}
-  %\Description{example visualization of a pedestrian flow in a stadium}
-  \label{fig:stadionEvacuationExample}
-\end{figure}
-Although the visual presentation is not the focus of these applications it does not necessarily have to look basic. As some of the introduced commercial tools also have export functions for the generated behaviour, especially the movement, these exports can then be used later to produce visually appealing videos in 3D applications like "3ds Max" as a demo of Jordan Lynam shows us. \cite{lynamJordan_viissim_3ds_max}
-
-\subsection{High quality focused simulation}
-
-Meanwhile we have the visual focused applications. Publicly available applications and research are rare and hard to find, in comparison to the realism focused simulation applications. The reason for this is these, especially the applications used for movies, are highly proprietary and not published. Most of the time information is only available in the form of making-of documentaries, interviews and CGI trailers. 
-However, the foundation these applications are based on is usually publicly available in the form of scientific papers. The challenges these applications are confronted with are strongly influenced by the crowd rendering research field, especially in games as these require real-time simulations \cite{thalmann_crowd_2013}.
-
-\subsubsection{Movies}
-
-There are multiple benefits of crowd simulation for movies and other types of creative video content. A nearly endless amount of possible scenes and shots can be created, for example a huge battle or a populated city. Some scenes would just not be possible to be animated manually with CGI not to mention hiring an amount of actors and actually filming it. In comparison to the realism focused applications, simulations for movies does not have the strong urge of proper continuous crowd behavior, as movies are grouped in shots where the viewer often doesn't see the same part of the crowd for a longer period of time. Lastly, creative content obviously doesn't always want realistically behaving crowds. Animators see crowd simulation more as a tool for controlling large crowds, so the research field for manipulation of crowds is also an important aspect on movie crowd simulation,  examples are \cite{kim_interactive_2014} \cite{ulicny_crowdbrush_2004}
-
-In the recent movie "THE HOBBIT: Battle of Five Armies" there were  two types of crowd simulation tools used. "Massive", one of the most advanced non-real-time simulation tools \cite{massive_website} for rendering the final scenes in post production, which at this scale requires render farms to run for weeks or even months to finish. Therefore a second tool, "army-manager" was used earlier in the production, as this could render much faster and allowed the visual effects team to plan their shots and get a draft of the final simulated crowd. \cite{wired_hobbit_doku}
-
-On the example of the movie "World War Z" we can also see that the simulations are often combined with a database of motion captures scenes. We already saw that approach in some literature \cite{thalmann_crowd_2013}, and rigid body physics. In addition the "Alice" program, which is used to simulate the zombie crowds, uses a microscopic based model where each agent is simulated by given rules and attributes, which we already know from a lot of papers. \cite{wired_worldwarz_doku} 
-
-An other commercial software for CGI crowds is "Golaem" \cite{golaem_website}. This software can be purchased for individual projects and is therefore used for movies with a smaller budget, commercials or other short CGI clips in need for crowds, that can't afford to develop their own software tool, but it is also used for big budget productions for example in "Game of Thrones" \cite{golaem_got_vid}
-
-\subsubsection{Games}
-
-As games and other interactive media are real-time simulations they have limited capabilities for costly simulations, so crowd simulations are not so common in today's games. One game genre that uses them are real-time strategy games like Total War \cite{total_war_website}, where the crowd simulation can also have an effect on gameplay and is not only used to render visually appealing large crowds. 
-Many approaches for real time simulation are using the common LOD (level of detail) technique for the rendering of the crowd and also for the simulation itself. However LOD is more complex when used on the actual crowd behaviour simulation than on the crowd rendering itself. There is always the danger of getting a wrongly simulated world when the simulation detail level is too low. Another commonly used trick is to render one simulated agent as multiple persons to simulate a crowd. Lastly, as games are usually run on a powerful GPU, real time crowd simulation can also benefit from that, especially the rendering part is well manageable by the GPU. \cite{thalmann_crowd_2013}
-
-An example of what can be done with various optimization is "Ultimate Epic Battle Simulator" \cite{ultimeEpicBattleSim_video} , which is basically a big real-time crowd simulation sandbox. They manage to simulate path tracing on up to ten thousands of individual soldiers in real time. 
-\begin{quote}
-"The algorithm is a highly optimized version of A*.  \label{term:A*Usage} The memory is shared, but the paths are not." \cite{ultimeEpicBattleSim_video}
-\end{quote} This example shows that crowd simulation at games comes with a big trade off for performance. 
 
 \section{Research Areas}
 
