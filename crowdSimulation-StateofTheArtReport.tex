@@ -162,7 +162,7 @@ The authors also compare their approach to a particle system for simulating dyna
 The authors also use a system which allow them to increase the number of individual agents. The key concept is to use a level of detail approach, in their case they only use information of the individual agent and other agents nearby. This level of detail is also used by a recent paper \cite{osullivan_levels_2002}. The authors picked up the research from Reynolds and extended it. The increased performance comes from level of details on the geometry, motion and behavior.
 
 \subsection{human crowd behavior}
- To begin simulation large human crowds, we first need to understand the behavior of human crowds in general. An important paper, when it comes to human crowd behaviour for common daily tasks, is written by Helbing and Molnár \shortcite{helbing_social_1995}. 
+\label{chap:helbing} To begin simulation large human crowds, we first need to understand the behavior of human crowds in general. An important paper, when it comes to human crowd behaviour for common daily tasks, is written by Helbing and Molnár \shortcite{helbing_social_1995}. 
  The results of this research is used in architectural application today, they support the planning of large buildings, train station, airports, etc.
 The main concept states back to research done by Lewin \shortcite{lewin_field_1951}, which says that there is an sequence of actions for the social force concept: The so called Stimulus, this can an perceived event for example, is triggering the next step which called psychological and mental process. The goal of this process is to produce an decision. This decision triggers the final step, the reaction, here an action is performed by the human, for example avoiding a collision.
 %\begin{figure}[h]
@@ -255,123 +255,45 @@ Additionally, crowd rendering can also benefit from other performance techniques
 
 \subsection{Generation of environments for crowds}
 
-Here the research is focused on producing areas for the crowd simulation. As most applications simulate people crowds around cities the automatic construction of urban areas is a big research topic. The research done here ranges from terrain modeling, plants-, lakes- and building placements over building floor plans and streets \cite{berg_computational_2000}. It is important to remember that the generated environment also impacts our whole simulation (path planning, collision avoidance, behaviour model, ...). 
+Here the research is focused on producing areas for the crowd simulation. As most applications simulate people crowds around cities the automatic construction of urban areas is a big research topic. The research done here ranges from terrain modeling, plants-, lakes- and building placements over building floor plans and streetsi \cite{berg_computational_2000}. It is important to remember that the generated environment also impacts our whole simulation (path planning, collision avoidance, behaviour model, ...). 
 As modelling these often large areas manually requires a lot of time, the need for automatic or semiautomatic algorithms is big. A rough separation of these methods are reconstruction based and parametric based approaches. 
 Aerial photos, 2D maps and laser profiler data is used to reconstruct real world environments. These applications are usually applied for historical cities. 
 Meanwhile parametric methods do not focus on the accurate representation of already existing areas, instead they want to provide cities for specific use cases where the application can decide on the parameters. These later can be filled with the crowd. Another important aspect is that the environment has to be interactive, for example  crowd agents should be able to enter buildings
 \cite{thalmann_crowd_2013}.
 
-\section{Concrete example papers}
+\section{Behavioral model - applications}
 
-In the last chapter I want to present some concrete example researches in the crowd simulation field. 
+As we already outlined in Section \ref{chap:key_areas}, the behavioral model is one of the core component of an believable crowd simulation. In the following Section we want to compare two groups of approaches rule- and force-based models and automated models, using some papers as examples.
 
-\subsection{HiDAC System}
+\subsection{Rule- and force-based models}
 
-The paper "Controlling Individual Agents in High-Density Crowd Simulation" \cite{pelechano_controlling_2007} is an interesting example because it combines multiple simulation models and algorithms to simulate a crowd in one system, which they call High-Density Autonomous Crowds (HiDAC) system. They focus on delivering a simulation that produces realistic crowds.
+We can group approaches for behavioral models, which have a fixed set of rules and/or calculations, together. These models are often application specific.
 
-The initial problem was that there was no simulation model which could handle high-density crowds realistically. They wanted to combine the advantages of rule based and social force based models without their disadvantages.
+\subsubsection{Architecture}
 
-\subsubsection{Architecture and goals}
-HiDAC is an agent based or microscopic simulation (see Section \ref{def:microscopic models}), so there is no higher system which controls the flow of the crowd, each agent acting on its own.
+Each approach has their own unique architecture, however there are some common patterns which can be found in different papers. In the following part we compare the architecture of two systems HiDAC \cite{pelechano_controlling_2007} and ViCrowd \cite{musse_hierarchical_2001}. Both systems separate their agent's behavior in multiple modules with different tasks.
+
+The High-Density Autonomous Crowds (HiDAC) System  is an agent based or microscopic simulation (see Section \ref{def:microscopic models}), so there is no higher system which controls the flow of the crowd, each agent acting on its own.
 Fig. \ref{fig:hidacArchitecture} shows the two main modules of the system. The high-level module is responsible for long term tasks like wayfinding by choosing attractor points for each agent. Other more detailed or spontaneous tasks are handled by the low-level module, like collision avoidance to other agents  within a bounded space.
 \begin{figure}[h]
   \centering
   \includegraphics[width=1\linewidth]{images/hidac-architacture.png}
-  \caption{architecture overview of HiDAC,  taken from \protect\cite{pelechano_controlling_2007}}
+  \caption{Architecture overview of HiDAC,  taken from \protect\cite{pelechano_controlling_2007}}
   %\Description{architecture overview of HiDAC}
   \label{fig:hidacArchitecture}
 \end{figure}
 For better performance and more realistic behavior the model separates the environment into different rooms that are connected by "portals" such as doors. Each agent chooses an attractor point in the room and navigates to it. Furthermore the agents only perform collision detection and other forces to agents in the same room, or in case the agent is in the area of a portal to other agents in the area of that specific portal.
 
-The goals of the system are the following:
-\begin{itemize}
-    \item Preventing agents from appearing to vibrate (shaking behavior), which is often seen on social force based systems especially in high density areas or when an agent is in a hurry.
-    \item Creating natural bi-directional flow rates. Other simulations often lack the behaviour of lane formation, which is however often observed in real crowds
-    \item Queueing and other organized behavior
-    \item Pushing through a crowd
-    \item Agents falling and becoming obstacles 
-    \item Propagating panic
-    \item Exhibiting impatience
-    \item Reacting in real time to changes in the environment
-\end{itemize}
 
-\subsubsection{Solution}
-To achieve these goals the paper presents a detailed calculation based on different forces and tricks. 
-
-As a starting point, they define a rectangle of influence for each agent, which is calculated based on the distance and angle to other static and dynamic objects. This allows to optimize performance, as only objects in the own rectangle of influence have to be considered for further calculations. 
-There are three main forces: \textbf{avoidance force, tangential force and repulsion force}. Avoidance force prevents direct collisions with objects. It is applied to static objects and other agents. Tangential force happens between agents and is used to control agents in a situation where they run towards each other, these are called bi-directional flows. On high density crowds this force allows the simulation to create the realistic behavior of lane formation. Interestingly this is not explicitly implemented in the model but results from the applied forces. Lastly, the repulsion force is triggered as a result of a collision with a static object like a wall or another agent. The main difference is that agents, compared to walls, can be pushed away. 
-
-In addition to the forces there are other tricks which allow them to boost their realistic simulation. 
-A very important one is the \textbf{stopping rule}. Based on the personality and current situation an agent may stop moving for a given time before he continues walking toward its attractor, however the agent can still be pushed away. This rule solves the shaking problem which most social force models have, but still allows the realistic pushing forces on agents. 
-A similar rule is the \textbf{waiting rule} that allows queues to be formed in non panic situations. Modeling of a different \textbf{personal space} for each agent allows the system to perform agents pushing each other. 
-The systems also allows to simulate a falling agent as a static obstacle in the case of a very dense crowd and special behaviour in panic situations. 
-The separation into different modules and communication between them allows the low-level module to detect bottlenecks and the high-level to find an alternative path, this is known as \textbf{crowd impatience}. Similar to this, rerouting in the case of a changing environment works, for example when a door is blocked.
-
-\subsection{Vision based system}
-
-"A Synthetic-Vision Based Steering Approach for Crowd Simulation" \cite{ondrej_synthetic-vision_2010} present an approach to control a microscopic simulation without using any forces, instead relying purely on predictions based on the view for each agent.
-But in comparison to HiDAC where a whole crowd simulation system was described, this approach only focuses on individually walking humans and their collision avoidance behavior. In addition, they explicitly do not focus on a high-performance solution, however there are some notes on possible performance improvements and benchmarks included. 
-
-The basic idea is that each agent decides based on their own visual perception of the environment and other agents whether they can continue their path or need to make an adaption by turning or decelerating. There are similar approaches in the robotics field, but these use image processing to get the information needed. Their system directly computes the visual image using 3D graphics processing on the GPU.
-The method they use does not explicitly check for collision instead it tries to minimize the chance of possible collision. The authors say that their approach using visual perception is better at imitating the real human locomotion control.
-
-\subsubsection{Model overview}
-
-The model is based on research from Cutting "How we avoid collisions with stationary and moving objects", his results on how humans avoid collisions can be broken down into two questions: 
-\begin{itemize}
-\item Will a collision occur? This is decided by an angle to the obstacle named the bearing angle $\alpha$ . When the derivative of the angle \textbf{\.{$\alpha$}} is zero a collision will occur. Fig. \ref{fig:visualBearingangle} visualized the bearing angle and when a collision occurs.
-\item When will a collision occur? Using the rate-of-growth for obstacles humans can estimate the \textbf{time-to-collision (ttc)}
-\end{itemize}
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=1\linewidth]{images/visualApproach-bearingAngle.png}
-  \caption{bearing angle and its time-derivative to detect collisions, taken from \protect\cite{ondrej_synthetic-vision_2010}. The picture in the middle will result in a collision therefore \.{$\alpha$} is zero.}
-  %\Description{bearing angle}
-  \label{fig:visualBearingangle}
-\end{figure}
-The paper changes the use of time-to-collision to time-to-interaction tti, so the time needed before the two participants get closest to another this can be a collision or just a walk by. So in conclusion the information when and where two agents get the closest to another and if a collision will occur can be described by the pair (\.{$\alpha$}, tti). As a general rule of thumb: turning changes \.{$\alpha$} and deceleration changes tti. 
-
-\subsubsection{Implementation of steering and collision avoidance} A simplified version for the algorithm can be described as following (for every agent):
-\begin{enumerate}
-    \item a virtual camera is set up with the view of the agent. Each pixel point represents an perceived point where the calculation is performed. 
-    \item based on the rendered image by the camera, the velocity and distance for obstacles and our own velocity we calculate the pair (\.{$\alpha$}, tti) for each perceived point.
-    \item When \.{$\alpha$} is below a threshold and $tti > 0$ and also lower than a threshold then a change in direction for this perceived point is necessary. 
-    \item the turning and deceleration information for each perceived point is combined into one metric 
-    \item updating the position of the agent using the calculated metric
-\end{enumerate}
-
-\subsubsection{Results}
-
-Fig. \ref{fig:visualResults} shows the results from the simulation. The advantage of this approach is the realistic lane formation behaviour as well as correctly handling a circle situation. Smooth animations are generated because deceleration only occurs right before a collision happens. The simulation shows a visual appealing result however there is no confirmation if these results reflect the reality of crowds.
-
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=1\linewidth]{images/visualApproach-results.png}
-  \caption{results showing the lane formation  and traffic circles behaviour, taken from \protect\cite{ondrej_synthetic-vision_2010}.}
-  %\Description{results}
-  \label{fig:visualResults}
-\end{figure}
-
-\subsection{ViCrowd}
-
-The paper "Hierarchical model for real time simulation of virtual human crowds" \cite{musse_hierarchical_2001} \label{exp:musse_hierarchical_2001} presents a crowd simulation system named ViCrowd. 
-The goal is to deliver a complete simulation system that can run in real time. 
-
-\subsubsection{Multilevel hierarchy}
-The model they use is unique because it is a combination of a macroscopic and microscopic model. The goal here is to use the performance advantage of macroscopic models while keeping the advantages of individualism and the resulting realism of microscopic models.
-They achieve this by taking the agents and assigning them to different groups. As a result, there are three complexity levels: (1) the whole crowd, (2) the different groups, (3) the individual agents. Although the assignment to the group is not fixed and an agent can convert to a different group during the simulation, an agent is only assigned to one group at a time.
-
+In comparison the ViCrowd System  \label{exp:musse_hierarchical_2001} is a combination of a macroscopic and microscopic model. The goal here is to use the performance advantage of macroscopic models while keeping the advantages of individualism and the resulting realism of microscopic models.
+They achieve this by taking the agents and assigning them to different groups. As a result, there are three complexity levels: (1) the whole crowd, (2) the different groups, (3) the individual agents. 
 Each level has a different complexity and assigned tasks / calculations. 
 The simplest level is the agent level where only a small amount of the movement decisions are made. Collision avoidance in the local area is one of them, as this can't be done at the group level.
 The most influential level is that of the group. Here the most knowledge is saved and complex decisions are made, for example path planning.
 At the crowd level only information relevant for all groups are stored and processed, for example interest points of the scene.
 The information flow is mostly top to bottom, so crowd$\rightarrow$group$\rightarrow$individual.
 This separation of levels and complexity allows the system to reduce the number of complex tasks and reuse information for multiple individuals at a group level. The simulation gains a huge performance benefit while keeping most of the realistic behaviour of a pure microscopic model. 
-\subsubsection{Combination of autonomous and scripted behaviour}
-ViCrowd provides three ways of handling group behaviour: autonomous, guided and programmed. 
-Autonomous groups handle all their movement by themselves. Guided groups are controlled from an external controller in real time during the simulation. And programmed groups act at simulation time accordingly to their beforehand provided script. Users can define the crowd or group behaviour using the provided script language. At runtime the system assigns the scripts the to specific groups. 
-What is interesting about this approach is that all three methods can be combined even on the same group. For example, the user can directly guide a group, but the individual agents still handle the collision avoidance. To manage this they implemented a behaviour priority model for the different input methods.
-\subsubsection{Crowd information}
+
 As basis for decision-making ViCrowd uses three categories of information. Knowledge, beliefs and intentions. 
 %%See Fig \ref{fig:hierarchicalInformationOverview} for an overview.
 %%
@@ -395,7 +317,86 @@ Fig. \ref{fig:hierarchicalarchitectureOverview} shows an overview of the complet
   \label{fig:hierarchicalarchitectureOverview}
 \end{figure}
 
-\subsection{Data-driven system}
+\subsubsection{Force based steering}
+
+According to the authors from the HiDAC System, Helbing's social force based system (see Section \ref{chap:helbing}) has one problem. Agents appear to vibrate in high density areas or when an agent is in a hurry. In addition the authors also wanted to achieve other believable crowd behavior which include: 
+\begin{itemize}
+    \item Creating natural bi-directional flow rates
+    \item Queueing and other organized behavior
+    \item Agents pushing through a crowd
+    \item Agents falling and becoming obstacles 
+    \item Propagating panic
+    \item Exhibiting impatience
+    \item Reacting in real time to changes in the environment
+\end{itemize}
+To achieve these behaviors, the authors use different forces and a set of rules.
+As a starting point, they define a rectangle of influence for each agent, which is calculated based on the distance and angle to other static and dynamic objects. This allows to optimize performance, as only objects in the own rectangle of influence have to be considered for further calculations. 
+There are three main forces: \textbf{avoidance force, tangential force and repulsion force}. Avoidance force prevents direct collisions with objects. It is applied to static objects and other agents. Tangential force happens between agents and is used to control agents in a situation where they run towards each other, these are called bi-directional flows. On high density crowds this force allows the simulation to create the realistic behavior of lane formation. Interestingly this is not explicitly implemented in the model but results from the applied forces. Lastly, the repulsion force is triggered as a result of a collision with a static object like a wall or another agent. The main difference is that agents, compared to walls, can be pushed away. 
+
+In addition to the forces there are other tricks which allow them to boost their realistic simulation. 
+A very important one is the \textbf{stopping rule}. Based on the personality and current situation an agent may stop moving for a given time before he continues walking toward its attractor, however the agent can still be pushed away. This rule solves the shaking problem which most social force models have, but still allows the realistic pushing forces on agents. 
+A similar rule is the \textbf{waiting rule} that allows queues to be formed in non panic situations. Modeling of a different \textbf{personal space} for each agent allows the system to perform agents pushing each other. 
+The systems also allows to simulate a falling agent as a static obstacle in the case of a very dense crowd and special behaviour in panic situations. 
+The separation into different modules and communication between them allows the low-level module to detect bottlenecks and the high-level to find an alternative path, this is known as \textbf{crowd impatience}. Similar to this, rerouting in the case of a changing environment works, for example when a door is blocked.
+
+\subsubsection{Steering by collision avoidance}
+
+Instead of using different forces and rules, Ondřej et al. \shortcite{ondrej_synthetic-vision_2010} present an approach to control a microscopic simulation by relying purely on predictions based on the view for each agent.
+The basic idea is that each agent decides based on their own visual perception of the environment and other agents whether they can continue their path or need to make an adaption by turning or decelerating. There are similar approaches in the robotics field, but these use image processing to get the information needed \cite{chaumette_visual_2006}. Ondřej's system however directly computes the visual image using 3D graphics processing on the GPU.
+The method they use does not explicitly check for collision instead it tries to minimize the chance of possible collision. The authors say that their approach using visual perception is better at imitating the real human locomotion control.
+
+The model is based on research from Cutting et al.  \shortcite{cutting_how_2014}, their results can be broken down into two questions: 
+\begin{itemize}
+\item Will a collision occur? This is decided by an angle to the obstacle named the bearing angle $\alpha$ . When the derivative of the angle \textbf{\.{$\alpha$}} is zero a collision will occur. Fig. \ref{fig:visualBearingangle} visualized the bearing angle and when a collision occurs.
+\item When will a collision occur? Using the rate-of-growth for obstacles humans can estimate the \textbf{time-to-collision (ttc)}
+\end{itemize}
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=1\linewidth]{images/visualApproach-bearingAngle.png}
+  \caption{bearing angle and its time-derivative to detect collisions, taken from \protect\cite{ondrej_synthetic-vision_2010}. The picture in the middle will result in a collision therefore \.{$\alpha$} is zero.}
+  %\Description{bearing angle}
+  \label{fig:visualBearingangle}
+\end{figure}
+The paper changes the use of time-to-collision to time-to-interaction tti, so the time needed before the two participants get closest to another this can be a collision or just a walk by. So in conclusion the information when and where two agents get the closest to another and if a collision will occur can be described by the pair (\.{$\alpha$}, tti). As a general rule of thumb: turning changes \.{$\alpha$} and deceleration changes tti. 
+
+
+ A simplified version for the algorithm can be described as following (for every agent):
+\begin{enumerate}
+    \item a virtual camera is set up with the view of the agent. Each pixel point represents an perceived point where the calculation is performed. 
+    \item based on the rendered image by the camera, the velocity and distance for obstacles and our own velocity we calculate the pair (\.{$\alpha$}, tti) for each perceived point.
+    \item When \.{$\alpha$} is below a threshold and $tti > 0$ and also lower than a threshold then a change in direction for this perceived point is necessary. 
+    \item the turning and deceleration information for each perceived point is combined into one metric 
+    \item updating the position of the agent using the calculated metric
+\end{enumerate}
+
+
+Fig. \ref{fig:visualResults} shows the results from the simulation. The advantage of this approach is the realistic lane formation behaviour as well as correctly handling a circle situation. Smooth animations are generated because deceleration only occurs right before a collision happens. The simulation shows a visual appealing result however there is no confirmation if these results reflect the reality of crowds.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=1\linewidth]{images/visualApproach-results.png}
+  \caption{Results showing the lane formation and traffic circles behaviour, taken from \protect\cite{ondrej_synthetic-vision_2010}.}
+  %\Description{results}
+  \label{fig:visualResults}
+\end{figure}
+
+
+\subsubsection{Combination of autonomous and scripted behaviour}
+
+Crowd simulation software in the real world require some form of control mechanism. The ViCrowd System presents an approach for combining three three ways of handling groups in the crowd: autonomous, guided and programmed. 
+Autonomous groups handle all their movement by themselves. Guided groups are controlled from an external controller in real time during the simulation. And programmed groups act at simulation time accordingly to their beforehand provided script. Users can define the crowd or group behaviour using the provided script language. At runtime the system assigns the scripts the to specific groups. 
+What is interesting about this approach is that all three methods can be combined even on the same group. For example, the user can directly guide a group, but the individual agents still handle the collision avoidance. To manage this they implemented a behaviour priority model for the different input methods. Fig. \ref{fig:viCrowdPriority} shows the priority rank of each control input. The external control overrules the scripted which again overrules the autonomous behavior.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.8\linewidth]{images/ViCrowdPriorityModel.png}
+  \caption{Priority model for different behavior control inputs, taken from \protect\cite{musse_hierarchical_2001}.}
+  \label{fig:viCrowdPriority}
+\end{figure}
+
+\subsection{Automated models}
+
+\subsubsection{Data-driven system}
 "Crowds by Example" \cite{lerner_crowds_2007} \label{exp:lerner_crowds_2007} have a completely different approach than other crowd simulation models. They simulate a crowd without the need for social rules or agents' perceptions. The system only relies on given input data in the form of videos from real world crowds.
 However, there are multiple restriction and assumptions. First, they only focus on providing a mechanism for the steering aspect of agents, and second, the agents do not have a specific goal like reaching a point of interest.
 
@@ -466,7 +467,7 @@ In conclusion that approach looks promising, as this requires relatively low eff
 \begin{figure}[h]
   \centering
   \includegraphics[width=1\linewidth]{images/aiSituations.png}
-  \caption{Results of different simulation scenarios, (a) Obstacle (b) Hallway (c) Crossway (d)Circle  Graphs for specifics scenarios, taken from \protect\cite{lee_crowd_2018}.}
+  \caption{Results of different simulation scenarios, (a) Obstacle (b) Hallway (c) Crossway (d) Circle  Graphs for specifics scenarios, taken from \protect\cite{lee_crowd_2018}.}
   %Description{Results for different simulation scenarios}
   \label{fig:aiScenarios}
 \end{figure}
