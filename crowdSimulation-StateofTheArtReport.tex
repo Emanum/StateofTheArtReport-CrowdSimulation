@@ -193,7 +193,7 @@ The rough separation of the research field described in \ref{chap:key_areas} can
 
 \subsection{Crowd behavior generation}
 
-An automated model that animates the crowd movement is the core component for crowd simulation. Here, the goal is that our agents do not need to be animated manually in regard to where to go and how to interact with each other. The creator of the animation only provides some goals, for example escape from the building, and sets parameters like the "panic parameter" (see Section \ref{term:panicParameter}). We already talked about some important aspects of that field in Sections \ref{chap:simulationModels} and \ref{chapter:elementaryPapers}.  In this research area there are a lot of different approaches and the problem of application specific algorithms is bigger here than in other areas.
+An automated model that animates the crowd movement is the core components for crowd simulation. Here, the goal is that our agents do not need to be animated manually in regard to where to go and how to interact with each other. The creator of the animation only provides some goals, for example escape from the building, and sets parameters like the "panic parameter" (see Section \ref{term:panicParameter}). We already talked about some important aspects of that field in Sections \ref{chap:simulationModels} and \ref{chapter:elementaryPapers}.  In this research area there are a lot of different approaches and the problem of application specific algorithms is bigger here than in other areas.
 
 In the following we want to describe the different challenges we face in this area:
 
@@ -263,7 +263,7 @@ Meanwhile parametric methods do not focus on the accurate representation of alre
 
 \section{Behavioral model - applications}
 
-As we already outlined in Section \ref{chap:key_areas}, the behavioral model is one of the core component of an believable crowd simulation. In the following Section we want to compare two groups of approaches rule- and force-based models and automated models, using some papers as examples.
+As we already outlined in Section \ref{chap:key_areas}, the behavioral model is one of the core component of an believable crowd simulation. In the following Section we want to compare two groups of approaches rule- and force-based models and automated models.
 
 \subsection{Rule- and force-based models}
 
@@ -319,7 +319,7 @@ Fig. \ref{fig:hierarchicalarchitectureOverview} shows an overview of the complet
 
 \subsubsection{Force based steering}
 
-According to the authors from the HiDAC System, Helbing's social force based system (see Section \ref{chap:helbing}) has one problem. Agents appear to vibrate in high density areas or when an agent is in a hurry. In addition the authors also wanted to achieve other believable crowd behavior which include: 
+According to the authors from the HiDAC System, Helbing's social force based system (see Section \ref{chap:helbing}) has one problem. Agents appear to vibrate in high density areas or when agents are in a hurry. They wanted to improve that, in addition the authors also wanted to achieve other believable crowd behavior which include: 
 \begin{itemize}
     \item Creating natural bi-directional flow rates
     \item Queueing and other organized behavior
@@ -331,10 +331,10 @@ According to the authors from the HiDAC System, Helbing's social force based sys
 \end{itemize}
 To achieve these behaviors, the authors use different forces and a set of rules.
 As a starting point, they define a rectangle of influence for each agent, which is calculated based on the distance and angle to other static and dynamic objects. This allows to optimize performance, as only objects in the own rectangle of influence have to be considered for further calculations. 
-There are three main forces: \textbf{avoidance force, tangential force and repulsion force}. Avoidance force prevents direct collisions with objects. It is applied to static objects and other agents. Tangential force happens between agents and is used to control agents in a situation where they run towards each other, these are called bi-directional flows. On high density crowds this force allows the simulation to create the realistic behavior of lane formation. Interestingly this is not explicitly implemented in the model but results from the applied forces. Lastly, the repulsion force is triggered as a result of a collision with a static object like a wall or another agent. The main difference is that agents, compared to walls, can be pushed away. 
+There are three main forces: \textbf{avoidance force, tangential force and repulsion force}. Avoidance force prevents direct collisions with objects. It is applied to static objects and other agents. Tangential force happens between agents and is used to control agents in a situation where they run towards each other, these situations are called bi-directional flows. On high density crowds this force allows the simulation to create the realistic behavior of lane formation. Interestingly this is not explicitly implemented in the model but results from the applied forces. Lastly, the repulsion force is triggered as a result of a collision with a static object like a wall or another agent. The main difference is that agents, compared to walls, can be pushed away. 
 
 In addition to the forces there are other tricks which allow them to boost their realistic simulation. 
-A very important one is the \textbf{stopping rule}. Based on the personality and current situation an agent may stop moving for a given time before he continues walking toward its attractor, however the agent can still be pushed away. This rule solves the shaking problem which most social force models have, but still allows the realistic pushing forces on agents. 
+A very important one is the \textbf{stopping rule}. Based on the personality and current situation an agent may stop moving for a given time before he continues walking toward its attractor, however the agent can still be pushed away. This rule solves the vibration problem which most social force models have, but still allows the realistic pushing forces on agents. 
 A similar rule is the \textbf{waiting rule} that allows queues to be formed in non panic situations. Modeling of a different \textbf{personal space} for each agent allows the system to perform agents pushing each other. 
 The systems also allows to simulate a falling agent as a static obstacle in the case of a very dense crowd and special behaviour in panic situations. 
 The separation into different modules and communication between them allows the low-level module to detect bottlenecks and the high-level to find an alternative path, this is known as \textbf{crowd impatience}. Similar to this, rerouting in the case of a changing environment works, for example when a door is blocked.
@@ -342,8 +342,8 @@ The separation into different modules and communication between them allows the 
 \subsubsection{Steering by collision avoidance}
 
 Instead of using different forces and rules, Ondřej et al. \shortcite{ondrej_synthetic-vision_2010} present an approach to control a microscopic simulation by relying purely on predictions based on the view for each agent.
-The basic idea is that each agent decides based on their own visual perception of the environment and other agents whether they can continue their path or need to make an adaption by turning or decelerating. There are similar approaches in the robotics field, but these use image processing to get the information needed \cite{chaumette_visual_2006}. Ondřej's system however directly computes the visual image using 3D graphics processing on the GPU.
-The method they use does not explicitly check for collision instead it tries to minimize the chance of possible collision. The authors say that their approach using visual perception is better at imitating the real human locomotion control.
+The basic idea is that each agent decides based on their own visual perception of the environment and other agents whether they can continue their path or need to make an adaption by turning or decelerating. There are similar approaches in the robotics field, but these use image processing to get the information needed \cite{chaumette_visual_2006}. Ondřej's system however, directly computes the visual image using 3D graphics processing on the GPU.
+The method they use does not explicitly check for collision instead it tries to minimize the chance of possible collision. The authors say, that their approach using visual perception is better at imitating the real human locomotion control.
 
 The model is based on research from Cutting et al.  \shortcite{cutting_how_2014}, their results can be broken down into two questions: 
 \begin{itemize}
@@ -363,7 +363,7 @@ The paper changes the use of time-to-collision to time-to-interaction tti, so th
  A simplified version for the algorithm can be described as following (for every agent):
 \begin{enumerate}
     \item a virtual camera is set up with the view of the agent. Each pixel point represents an perceived point where the calculation is performed. 
-    \item based on the rendered image by the camera, the velocity and distance for obstacles and our own velocity we calculate the pair (\.{$\alpha$}, tti) for each perceived point.
+    \item based on the rendered image by the camera, the velocity and distance for obstacles and our own velocity, we calculate the pair (\.{$\alpha$}, tti) for each perceived point.
     \item When \.{$\alpha$} is below a threshold and $tti > 0$ and also lower than a threshold then a change in direction for this perceived point is necessary. 
     \item the turning and deceleration information for each perceived point is combined into one metric 
     \item updating the position of the agent using the calculated metric
@@ -396,40 +396,35 @@ What is interesting about this approach is that all three methods can be combine
 
 \subsection{Automated models}
 
+For our second group, we investigate approaches that does not primarily use strict rules, in the form of social rules, agents' perceptions or forces. Instead they present flexible algorithms which can managed different kind of scenarios and are therefore not application specific.    
+
 \subsubsection{Data-driven system}
-"Crowds by Example" \cite{lerner_crowds_2007} \label{exp:lerner_crowds_2007} have a completely different approach than other crowd simulation models. They simulate a crowd without the need for social rules or agents' perceptions. The system only relies on given input data in the form of videos from real world crowds.
-However, there are multiple restriction and assumptions. First, they only focus on providing a mechanism for the steering aspect of agents, and second, the agents do not have a specific goal like reaching a point of interest.
+Lerner et al. \shortcite{lerner_crowds_2007} \label{exp:lerner_crowds_2007} presented an approach which only relies on given input data in the form of videos from real world crowds. The basic idea is to create a database of the steering behaviour agents in crowds have based on a given input of videos. At simulation time the system analyses the current situation and searches for a similar pattern in the database, then applies the saved steering behaviour of real humans in the database to the agent in the simulation. The advantage of this method, in addition to the non-application specific from the automated models, is the diversity. The resulting animation offers a big diversity of steering behaviour, which results in a better visual appealing simulation. 
 
-The basic idea is to create a database of the steering behaviour agents in crowds have based on a given input of videos. At simulation time the system analyses the current situation and searches for a similar pattern in the database, then applies the steering behaviour of real humans in the database to the agent in the simulation. The advantages of this method are: 
-\begin{itemize}
-    \item The resulting animation offers a big diversity of steering behaviour, which results in a better visual appealing simulation.
-    \item Because there are no explicit rules or assumptions about the crowd behavior the simulation is only dependent on the input data. This means that the system is not domain specific and can be adapted to different use cases by changing the input data.
-\end{itemize}
-
-\subsubsection{Preparing the database}
+\paragraph{Preparing the database}
 The input data should consist of video clips filmed from a top perspective. In a second step the movement data needs to be tracked. In the example they tracked it by hand.
 The system takes this tracked data and creates example trajectories, based on information such as the surrounding obstacles and other agents, which will be saved in the database. The influence function decides which aspects of the tracked data is used to create the examples. 
 
-\subsubsection{Running the simulation}
+\paragraph{Running the simulation}
 At the beginning of the simulation static obstacles like walls are placed. After that the environment is filled with agents that have a starting position and velocity. Then the simulation process begins.
 The system checks in each simulation step for every agent if it needs to calculate a new steering trajectory. There are two question to consider for that: 
 \begin{itemize}
     \item Has the agent already fulfilled the whole assigned trajectory?
-    \item Has the surrounding environment changed since the last trajectory was assigned, for a defined threshold.
+    \item Has the surrounding environment changed, for a predefined threshold, since the last trajectory was assigned.
 \end{itemize}
 If the system needs to assign a new trajectory it creates a query with the given surrounding area, which is than performed against the database. As a result, the database gives us a most appropriate result trajectory that we assign the agent. 
-However, the problem here is that collisions can occur. They deal with this by checking the trajectories for every agent if a collision will occur. If a collision is found the next best match from the database is used instead. If all matches fail to deliver a collision free simulation a fixed calculation tries to find a path away from the collision. 
+However, the problem here is that the database result does not guarantee us a collision free path. The authors deal with this by checking the trajectories for every agent if a collision will occur. If a collision is found the next best match from the database is used instead. If all matches fail to deliver a collision free simulation a fixed calculation, as an fallback option, tries to find a path away from the collision. 
 
-\subsubsection{Results}
-In their example the database consists of thousands of examples. They use an approximate nearest neighbor search to find similar entries in the database, tough for the collision avoidance they use a simple brute force approach. In addition, finding the right parameters for the simulation was a challenge.
+\paragraph{Results}
+In their example the database consists of thousands of examples. They use an approximate nearest neighbor search to find similar entries in the database, tough for the collision avoidance they use a simple brute force approach. The authors said, that finding the right parameters for the simulation was a challenge.
 The resulting animation shows a variety of different steering behaviour and smooth collision avoidance without any problem of vibration.  
-A big problem is the performance aspect: they only managed to do real-time simulation with two agents. When the simulation is run with 20 agents the performance is dropping to ~5fps. 
+A big problem is the performance aspect: they only managed to do real-time simulation with two agents. When the simulation is run with 20 agents the performance is dropping to ~5 fps. 
 For future work a combination with a specific goal or a combination with other models is possible. In addition, the definition of the influence function and query can also be approved.
 
 \subsection{Ai-driven systems}
-A relatively new approach are ai-driven simulation system as "Crowd simulation by deep reinforcement learning" \cite{lee_crowd_2018} shows. They use reinforcement learning and deep neural networks (DNN) with a simple reward function to simulate the way finding and collision avoidance for each agent individually, so it is a microscopic process. In comparison to the other presented systems this paper only focuses on the aspect of agent navigation but each agent has a target destination in the simulation.
+A relatively new approach are ai-driven simulation systems as Lee et al. \cite{lee_crowd_2018} presents. The authors use reinforcement learning and deep neural networks (DNN) with a simple reward function to simulate the way finding and collision avoidance for each agent individually, so it is a microscopic process.
 
-\subsubsection{Model}
+\paragraph{Model}
 The authors simplify the simulation to a 2D area. Each agent has a radius $r$, a position $p$ and an orientation $\theta$, obstacles are modeled the same way except they don't have an orientation. 
 This simplifies the collision detection, as this can easily be checked by measuring the distance between two simulation objects and comparing it to the sum of their radii.
 
@@ -439,7 +434,7 @@ R = r_{goal} + r_{collision} + r_{smooth}
 \end{equation}
 where $r_{goal}$ influences the distance from the agent to the goal. $r_{collision}$ is a constant factor that is added, if an collision occurred, however, the number of collisions does not matter here. $r_{smooth}$ is a function to cover the smoothness of the movement by comparing the resulting position and orientation to their minimum and maximum values.  
 
-\subsubsection{Algorithm}
+\paragraph{Algorithm}
 To get input data for the reinforcement learning the authors use visual sensors that act like casting rays from the center of the agent see Fig. \ref{fig:aiConceptOverview}. While the simulation is running, during every simulation step the system generates new values for the agents position and orientation based on the DNN. When the learning process is active it also influences the DNN through the reward function.
 \begin{figure}[h]
   \centering
@@ -449,7 +444,7 @@ To get input data for the reinforcement learning the authors use visual sensors 
   \label{fig:aiConceptOverview}
 \end{figure}
 
-\subsubsection{Results}
+\paragraph{Results}
 To test their system they run tests with 4 different scenarios, (see Fig. \ref{fig:aiScenarios}). In a first step the system was trained for that specific scenario only, where they began with few agents and increased the complexity of the situation over time. Interestingly, the hallway scenario differs quite significantly as the learning curve only rises up late at ~45-50 thousand iterations (see Fig. \ref{fig:aiPerformance}).
 
 After that they also ran tests for a generalizing DNN that works for all scenarios. To do that, they randomly selected different scenarios, preferring easier ones at the beginning. Their results show that a generalizing DNN can perform equally well compared to one specially prepared for that scenario. 
