@@ -347,24 +347,24 @@ The method they use does not explicitly check for collision instead it tries to 
 
 The model is based on research from Cutting et al.  \shortcite{cutting_how_2014}, their results can be broken down into two questions: 
 \begin{itemize}
-\item Will a collision occur? This is decided by an angle to the obstacle named the bearing angle $\alpha$ . When the derivative of the angle \textbf{\.{$\alpha$}} is zero a collision will occur. Fig. \ref{fig:visualBearingangle} visualized the bearing angle and when a collision occurs.
+\item Will a collision occur? This is decided by an angle to the obstacle named the bearing angle $\alpha$ . When the derivative of the angle \textbf{$\dot{\alpha}$} is zero a collision will occur. Fig. \ref{fig:visualBearingangle} visualized the bearing angle and when a collision occurs.
 \item When will a collision occur? Using the rate-of-growth for obstacles humans can estimate the \textbf{time-to-collision (ttc)}
 \end{itemize}
 \begin{figure}[h]
   \centering
   \includegraphics[width=1\linewidth]{images/visualApproach-bearingAngle.png}
-  \caption{bearing angle and its time-derivative to detect collisions, taken from \protect\cite{ondrej_synthetic-vision_2010}. The picture in the middle will result in a collision therefore \.{$\alpha$} is zero.}
+  \caption{bearing angle and its time-derivative to detect collisions, taken from \protect\cite{ondrej_synthetic-vision_2010}. The picture in the middle will result in a collision therefore $\dot{\alpha}$ is zero.}
   %\Description{bearing angle}
   \label{fig:visualBearingangle}
 \end{figure}
-The paper changes the use of time-to-collision to time-to-interaction tti, so the time needed before the two participants get closest to another this can be a collision or just a walk by. So in conclusion the information when and where two agents get the closest to another and if a collision will occur can be described by the pair (\.{$\alpha$}, tti). As a general rule of thumb: turning changes \.{$\alpha$} and deceleration changes tti. 
+The paper changes the use of time-to-collision to time-to-interaction tti, so the time needed before the two participants get closest to another this can be a collision or just a walk by. So in conclusion the information when and where two agents get the closest to another and if a collision will occur can be described by the pair ($\dot{\alpha}$, tti). As a general rule of thumb: turning changes $\dot{\alpha}$ and deceleration changes tti. 
 
 
  A simplified version for the algorithm can be described as following (for every agent):
 \begin{enumerate}
     \item a virtual camera is set up with the view of the agent. Each pixel point represents an perceived point where the calculation is performed. 
-    \item based on the rendered image by the camera, the velocity and distance for obstacles and our own velocity, we calculate the pair (\.{$\alpha$}, tti) for each perceived point.
-    \item When \.{$\alpha$} is below a threshold and $tti > 0$ and also lower than a threshold then a change in direction for this perceived point is necessary. 
+    \item based on the rendered image by the camera, the velocity and distance for obstacles and our own velocity, we calculate the pair ($\dot{\alpha}$, tti) for each perceived point.
+    \item When $\dot{\alpha}$ is below a threshold and $tti > 0$ and also lower than a threshold then a change in direction for this perceived point is necessary. 
     \item the turning and deceleration information for each perceived point is combined into one metric 
     \item updating the position of the agent using the calculated metric
 \end{enumerate}
