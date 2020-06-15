@@ -134,10 +134,10 @@ On the example of the movie "World War Z" we can also see that the simulations a
 
 \paragraph{Games}
 
-As games and other interactive media are real-time simulations they have limited capabilities for costly simulations, so crowd simulations are not so common in today's games. One game genre that uses them are real-time strategy games like Total War \cite{total_war_website}, where the crowd simulation can also have an effect on gameplay and is not only used to render visually appealing large crowds. 
+As games and other interactive media are real-time simulations they have limited capabilities for costly simulations, so crowd simulations are not so common in today's games. The theme park simulation game Planet Coaster, however make great use of crowd simulation technology. In a blog post McCarthy \shortcite{mccarthy_game_2020} explains what methods and tricks they used during the development. In the end they managed to simulate up to 10 thousand people in real time, in addition to the other game effects, which is very impressive. The game studio managed this by simulating path flows between different interest points in the scene.   
 Many approaches for real time simulation are using the common LOD (level of detail) technique for the rendering of the crowd and also for the simulation itself. However LOD is more complex when used on the actual crowd behaviour simulation than on the crowd rendering itself. There is always the danger of getting a wrongly simulated world when the simulation detail level is too low. Another commonly used trick is to render one simulated agent as multiple persons to simulate a crowd. Lastly, as games are usually run on a powerful GPU, real time crowd simulation can also benefit from that, especially the rendering part is well manageable by the GPU.
 
-An example of what can be done with various optimization is "Ultimate Epic Battle Simulator" \cite{ultimeEpicBattleSim_video} , which is basically a big real-time crowd simulation sandbox. They manage to simulate path tracing on up to ten thousands of individual soldiers in real time. Sadly as it is proprietary there is not much detailed information, besides that they are using a highly optimized version of A* path tracing \label{term:A*Usage} with a shared memory, publicly available. 
+Another example of what can be done with various optimization is "Ultimate Epic Battle Simulator" \cite{ultimeEpicBattleSim_video} , which is basically a big real-time crowd simulation sandbox. They manage to simulate path tracing on up to ten thousands of individual soldiers in real time. Sadly as it is proprietary there is not much detailed information, besides that they are using a highly optimized version of A* path tracing \label{term:A*Usage} with a shared memory, publicly available. 
 This example shows that crowd simulation at games can significantly impact gameplay, but requires a lot of optimization for a reasonable performance.
 
 \subsection{Simulation Models}
@@ -145,7 +145,7 @@ This example shows that crowd simulation at games can significantly impact gamep
 To simulate realistic crowd behavior a model is needed that specifies how the crowd reacts in each simulation step. The used models can be classified in roughly two groups: macroscopic and microscopic models. The difference between the two is how they see an agent in a crowd. An \textbf{agent} is a single actor in a crowd simulation that can move and act independently from other agents. This can be a human in a crowd of people but also a car in a traffic simulation. However, on some applications and papers especially those who handle real time simulations, agents are grouped to reduce the simulation cost and only rendered as multiple agents / persons.
 
 \subsubsection{\textbf{Macroscopic models}}
-These types of models try to simulate the crowd as a whole unit. They are often used in a real-time scenario because the number of individual agents in the crowd does not highly affect performance in the simulation. In some papers they are also referred as "continuum-based"\cite{xu_crowd_2014}. The goal here is that the crowd as a whole reacts realistically. These simulations can be compared to gas or fluid simulations because not each particle, or in our case each agent, is simulated. Moreover a common path for the fluid or whole crowd is simulated. An example are the pedestrian and crowd simulation papers from Hudges \cite{hughes_continuum_2002} \cite{hughes_flow_2003}
+These types of models try to simulate the crowd as a whole unit. They are often used in a real-time scenario because the number of individual agents in the crowd does not highly affect performance in the simulation. In some papers they are also referred as "continuum-based" \cite{xu_crowd_2014}. The goal here is that the crowd as a whole reacts realistically. These simulations can be compared to gas or fluid simulations because not each particle, or in our case each agent, is simulated. Moreover a common path for the fluid or whole crowd is simulated. An example are the pedestrian and crowd simulation papers from Hudges \cite{hughes_continuum_2002} \cite{hughes_flow_2003}
 
 \subsubsection{\textbf{Microscopic models}} \label{def:microscopic models}
 On the other hand microscopic models, also referred as "agent-based"\cite{xu_crowd_2014}, try to simulate each single agent. The resulting simulation often brings better results than a simulation with a macroscopic model but it also costs more performance, so it is not suitable for simulating large crowds in real time. Most approaches define rules for each agent on how to react to the environment and different scenarios. There is a lot of different papers and approaches to which rules and attributes provide what results. A common used approach are force-based simulations, see Section \ref{chapter:elementaryPapers} for examples.
@@ -451,7 +451,7 @@ After that they also ran tests for a generalizing DNN that works for all scenari
 
 In conclusion that approach looks promising, as this requires relatively low effort in preparing the data compared to data-driven system, and still doesn't rely on any explicitly set behaviours. However, while the resulting simulation looks visually appealing but there was no validation if the resulting behaviour is also present in real world crowds. As for future work, they suggested to combine an ai-driven microscopic process with a multi-agent reinforcement learning one to gain the benefits of a macroscopic model. This would mean to adapt the reward function on multiple agents instead of treating each agent separately.  
 
-\begin{figure}[!htb]
+\begin{figure}
   \centering
   \includegraphics[width=1\linewidth]{images/aiPerformance.png}
   \caption{Performance Graphs for specifics scenarios, taken from \protect\cite{lee_crowd_2018}.}
@@ -459,7 +459,7 @@ In conclusion that approach looks promising, as this requires relatively low eff
   \label{fig:aiPerformance}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}
   \centering
   \includegraphics[width=1\linewidth]{images/aiSituations.png}
   \caption{Results of different simulation scenarios, (a) Obstacle (b) Hallway (c) Crossway (d) Circle  Graphs for specifics scenarios, taken from \protect\cite{lee_crowd_2018}.}
