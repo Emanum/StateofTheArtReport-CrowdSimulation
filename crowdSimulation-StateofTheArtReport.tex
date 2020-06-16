@@ -161,7 +161,7 @@ The authors also compare their approach to a particle system for simulating dyna
 
 The authors also use a system which allow them to increase the number of individual agents. The key concept is to use a level of detail approach, in their case they only use information of the individual agent and other agents nearby. This level of detail is also used by a recent paper \cite{osullivan_levels_2002}. The authors picked up the research from Reynolds and extended it. The increased performance comes from level of details on the geometry, motion and behavior.
 
-\subsection{human crowd behavior}
+\subsection{Human crowd behavior}
 \label{chap:helbing} To begin simulation large human crowds, we first need to understand the behavior of human crowds in general. An important paper, when it comes to human crowd behaviour for common daily tasks, is written by Helbing and Molnár \shortcite{helbing_social_1995}. 
  The results of this research is used in architectural application today, they support the planning of large buildings, train station, airports, etc.
 The main concept states back to research done by Lewin \shortcite{lewin_field_1951}, which says that there is an sequence of actions for the social force concept: The so called Stimulus, this can an perceived event for example, is triggering the next step which called psychological and mental process. The goal of this process is to produce an decision. This decision triggers the final step, the reaction, here an action is performed by the human, for example avoiding a collision.
@@ -226,9 +226,6 @@ In some cases there are already models available to use. Of course these can als
 \subsubsection{Auto generated models from population}
 An optimum would be to generate a large amount of diverse looking agents with as little information as possible, this idea being the goal for this approach. However, it is rather hard to create models that can compete against models from other approaches. Early research done by Sheldon \shortcite{sheldon_varieties_1940} investigate the "somatotype model". Later on it was enhanced by \cite{carter_somatotyping_1990}, the approach uses multiple extreme somatotypes and tries to generate models in between them. The demand for efficient result analysis to evaluate the generated models is another challenge. This is done with microscopic analysis, for testing the appearance against the input data, and macroscopic analysis for testing the diversity of generated models \cite{thalmann_crowd_2013}. 
 
-\subsubsection{Computer vision}
-Is also another approach to generated customized models. This allows the user to generate a model based on an image. It is used in some games in the character creation process \cite{thalmann_crowd_2013}. 
-
 \subsubsection{Vary model for large crowds} 
 One problem with all approaches is that they only work for a limited amount of agents effectively. To prevent the use of nearly similar looking agents and to reduce the memory needed for storing and later also rendering the agents it is possible to vary the generated models. This can be done on multiple levels like skeleton, meshes, textures and animations. 
 \cite{thalmann_crowd_2013}
@@ -278,7 +275,7 @@ Fig. \ref{fig:hidacArchitecture} shows the two main modules of the system. The h
 \begin{figure}[h]
   \centering
   \includegraphics[width=1\linewidth]{images/hidac-architacture.png}
-  \caption{Architecture overview of HiDAC,  taken from \protect\cite{pelechano_controlling_2007}}
+  \caption{Architecture overview of HiDAC, taken from \protect\cite{pelechano_controlling_2007}.}
   %\Description{architecture overview of HiDAC}
   \label{fig:hidacArchitecture}
 \end{figure}
@@ -353,7 +350,7 @@ The model is based on research from Cutting et al.  \shortcite{cutting_how_2014}
 \begin{figure}[h]
   \centering
   \includegraphics[width=1\linewidth]{images/visualApproach-bearingAngle.png}
-  \caption{bearing angle and its time-derivative to detect collisions, taken from \protect\cite{ondrej_synthetic-vision_2010}. The picture in the middle will result in a collision therefore $\dot{\alpha}$ is zero.}
+  \caption{Bearing angle and its time-derivative to detect collisions, taken from \protect\cite{ondrej_synthetic-vision_2010}. The picture in the middle will result in a collision therefore $\dot{\alpha}$ is zero.}
   %\Description{bearing angle}
   \label{fig:visualBearingangle}
 \end{figure}
