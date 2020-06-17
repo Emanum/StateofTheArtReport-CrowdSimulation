@@ -188,6 +188,7 @@ In their model they have a "panic parameter" \label{term:panicParameter} which a
 This paper is often cited, one example is \cite{braun_simulating_2005}\label{exp:braun2005}. Here the authors extend the research by adding a Finite State Machine to the simulation which allows them to control complex environments and hazard events in more detail. In Addition the authors also provide a mechanism to model the communication between individual agents. Helbing's work is also often compared to other simulation models, for example in the paper \cite{zheng_modeling_2009}. This paper also states that the social force model, for specific scenarios like finding a way throw traffic flow, is oversimplified in relation to the underlying assumptions to the model.
 
 \section{Research Areas}
+\label{chap:researchAreas}
 
 The rough separation of the research field described in \ref{chap:key_areas} can be extended for more detail.
 
@@ -392,7 +393,7 @@ What is interesting about this approach is that all three methods can be combine
 \end{figure}
 
 \subsection{Automated models}
-
+\label{chap:automatedModels}
 For our second group, we investigate approaches that does not primarily use strict rules, in the form of social rules, agents' perceptions or forces. Instead they present flexible algorithms which can managed different kind of scenarios and are therefore not application specific.    
 
 \subsubsection{Data-driven system}
@@ -463,6 +464,15 @@ In conclusion that approach looks promising, as this requires relatively low eff
   %Description{Results for different simulation scenarios}
   \label{fig:aiScenarios}
 \end{figure}
+
+\section{Conclusion}
+Crowd simulation is an scientific field which is now researched for a relatively long time. Reynolds published his first paper on the topic in 1987, today 33 years later there is still no uniformly approach in the scientific community. The rule and force based approaches are examined in detail, but there are also completely different approaches as we have seen in section \ref{chap:automatedModels}. 
+The lack of some standardised methods, algorithms and frameworks also seems to slow down the development of new applications and usage of crowd simulation on the market. Getting into the topic and choosing an appropriate approach for your specific use case is rather hard, for developers but as well for researchers.
+However the crowd simulation field is still a big topic, there are a lot of different research areas (see section \ref{chap:researchAreas}), with a lot of potential for future applications.
+
+Most of the approach are based, at least in some part, on microscopic models. These are often computational costly and therefore require some tricks and simplifications on assumptions to perform them in (near) real-time. As hardware, especially GPU computing which can be used for parallelizing rendering but also steering individual agents, is getting faster it seems natural that there will be more complex models possible in the future.
+For future research the automated models seems promising, as these would allow us to get an uniformly approach. This could then be used on different applications and frameworks and is therefore not a domain specific approach anymore. 
+AI powered crowd simulations are still an relatively unresearched topic. But as there is currently a lot of ongoing research and development on the machine learning field, i would assume that we will see more AI powered crowd simulations in the near future.   
 
 \bibliographystyle{acmsiggraph}
 \nocite{*}
