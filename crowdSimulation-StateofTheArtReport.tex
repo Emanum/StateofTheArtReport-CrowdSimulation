@@ -64,9 +64,10 @@
 %% Abstract section.
 
 \begin{abstract}
-The goal of this state of the art report is to give a broad overview of the topic and act as a starting point to readers who are completely new to the field. As crowd simulation is a wide field with different research communities, it is impossible to mention all approaches to the challenges this area faces, so the report focuses on the challenges themselves and describes the idea behind common approaches. In addition, there are references to different papers which either directly cover the approaches or literature which summarize the research in more detail.
+Simulations of crowds are researched since over 30 years, still there are a lot of completely new and innovative approaches presented by different authors in the field. In addition the research field also enables a big range of original applications, that would not be able without the existing research. Some examples here are huge visual appealing crowds in movies and games, as well as important evacuation simulations of complex infrastructure like train stations and stadiums, Fig. \ref{fig:teaser} shows some examples.
 
-In the Introduction the research procedure, the two key areas, simulation models and often used terms are explained. Additionally some elementary and frequently cited papers are described in more detail as they show the foundation of crowd simulation. The Report continues with an overview of application areas and where the research is applied with given real world examples. After that, the research areas and problems these face are described in more detail. Lastly, the report covers some promising algorithms and approaches in more detail as an example of recently published papers on this field.
+In this report we provide an overview of the different research fields of crowd simulation. Later we focus on presenting two types of approaches, rule- and force-based models along with automated models. Lastly there is a short conclusion with our own thoughts for future research.
+
 \end{abstract}
 
 %% ACM Computing Review (CR) categories. 
@@ -467,10 +468,10 @@ In conclusion that approach looks promising, as this requires relatively low eff
 
 \section{Conclusion}
 Crowd simulation is an scientific field which is now researched for a relatively long time. Reynolds published his first paper on the topic in 1987, today 33 years later there is still no uniformly approach in the scientific community. The rule and force based approaches are examined in detail, but there are also completely different approaches as we have seen in section \ref{chap:automatedModels}. 
-The lack of some standardised methods, algorithms and frameworks also seems to slow down the development of new applications and usage of crowd simulation on the market. Getting into the topic and choosing an appropriate approach for your specific use case is rather hard, for developers but as well for researchers.
+The lack of some standardised methods, algorithms and frameworks also seems to slow down the development of new applications and usage of crowd simulation on the market. Getting into the topic and choosing an appropriate approach for your specific use case is rather hard, for developers as well for researchers.
 However the crowd simulation field is still a big topic, there are a lot of different research areas (see section \ref{chap:researchAreas}), with a lot of potential for future applications.
 
-Most of the approach are based, at least in some part, on microscopic models. These are often computational costly and therefore require some tricks and simplifications on assumptions to perform them in (near) real-time. As hardware, especially GPU computing which can be used for parallelizing rendering but also steering individual agents, is getting faster it seems natural that there will be more complex models possible in the future.
+Most approaches are based, at least in some part, on microscopic models. These are often computational costly and therefore require some tricks and simplifications on assumptions to perform them in (near) real-time. As hardware, especially GPU computing which can be used for parallelizing rendering but also steering individual agents, is getting faster it seems natural that there will be more complex models possible in the future.
 For future research the automated models seems promising, as these would allow us to get an uniformly approach. This could then be used on different applications and frameworks and is therefore not a domain specific approach anymore. 
 AI powered crowd simulations are still an relatively unresearched topic. But as there is currently a lot of ongoing research and development on the machine learning field, i would assume that we will see more AI powered crowd simulations in the near future.   
 
