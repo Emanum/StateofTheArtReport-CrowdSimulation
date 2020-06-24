@@ -52,7 +52,7 @@
 
 \teaser{
  \includegraphics[width=\textwidth]{images/bannerImg.png}
- \caption{Example crowd simulations. Left: collision avoidance model \protect\cite{ondrej_synthetic-vision_2010}, middle-left: commercial application MassMotion \protect\cite{mediaworks_pedestrian_2020}, middle-right: crowd behaviour model \protect\cite{pelechano_controlling_2007}, right: bird flock animation, one of the first papers on the crowd simulation field \protect\cite{reynolds_flocks_1987}}
+ \caption{Example crowd simulations. Left: collision avoidance model \protect\cite{ondrej_synthetic-vision_2010}, middle-left: commercial application MassMotion \protect\cite{mediaworks_pedestrian_2020}, middle-right: crowd behaviour model \protect\cite{pelechano_controlling_2007}, right: bird flock animation, one of the first papers on the crowd simulation field \protect\cite{reynolds_flocks_1987}}.
  \label{fig:teaser}
 }
 
@@ -66,7 +66,7 @@
 \begin{abstract}
 Simulations of crowds are researched since over 30 years, still there are a lot of completely new and innovative approaches presented by different authors in the field. In addition the research field also enables a big range of original applications, that would not be able without the existing research. Some examples here are huge visual appealing crowds in movies and games, as well as important evacuation simulations of complex infrastructure like train stations and stadiums, Fig. \ref{fig:teaser} shows some examples.
 
-In this report we provide an overview of the different research fields of crowd simulation. Later we focus on presenting two types of approaches, rule- and force-based models along with automated models. Lastly there is a short conclusion with our own thoughts for future research.
+In this report we provide an overview of the different research fields of crowd simulation. Later we focus on presenting two types of approaches: rule- and force-based models along with automated models. Lastly there is a short conclusion with our own thoughts for future research.
 
 \end{abstract}
 
@@ -125,11 +125,11 @@ However, the foundation these applications are based on is usually publicly avai
 
 \paragraph{Movies}
 
-There are multiple benefits of crowd simulation for movies and other types of creative video content. A nearly endless amount of possible scenes and shots can be created, for example a huge battle or a populated city. Some scenes would just not be possible to be animated manually with CGI not to mention hiring an amount of actors and actually filming it. In comparison to the realism focused applications, simulations for movies does not have the strong urge of proper continuous crowd behavior, as movies are grouped in shots where the viewer often doesn't see the same part of the crowd for a longer period of time. Lastly, creative content obviously doesn't always want realistically behaving crowds. Animators see crowd simulation more as a tool for controlling large crowds, so the research field for manipulation of crowds is also an important aspect on movie crowd simulation,  examples are \cite{kim_interactive_2014} \cite{ulicny_crowdbrush_2004}
+There are multiple benefits of crowd simulation for movies and other types of creative video content. A nearly endless amount of possible scenes and shots can be created, for example a huge battle or a populated city. Some scenes would just not be possible to be animated manually with CGI not to mention hiring an amount of actors and actually filming it. In comparison to the realism focused applications, simulations for movies does not have the strong urge of proper continuous crowd behavior, as movies are grouped in shots where the viewer often doesn't see the same part of the crowd for a longer period of time. Lastly, creative content obviously doesn't always want realistically behaving crowds. Animators see crowd simulation more as a tool for controlling large crowds, so the research field for manipulation of crowds is also an important aspect on movie crowd simulation,  examples are \cite{kim_interactive_2014} \cite{ulicny_crowdbrush_2004}.
 
 In the recent movie "THE HOBBIT: Battle of Five Armies" there were  two types of crowd simulation tools used. "Massive", one of the most advanced non-real-time simulation tools \cite{massive_website} for rendering the final scenes in post production, which at this scale requires render farms to run for weeks or even months to finish. Therefore a second tool, "army-manager" was used earlier in the production, as this could render much faster and allowed the visual effects team to plan their shots and get a draft of the final simulated crowd. \cite{wired_hobbit_doku}
 
-On the example of the movie "World War Z" we can also see that the simulations are often combined with a database of motion captures scenes. We already saw that approach in some literature \cite{thalmann_crowd_2013}, and rigid body physics. In addition the "Alice" program, which is used to simulate the zombie crowds, uses a microscopic based model where each agent is simulated by given rules and attributes, which we already know from a lot of papers. \cite{wired_worldwarz_doku} 
+On the example of the movie "World War Z" we can also see that the simulations are often combined with a database of motion captures scenes. We already saw that approach in some literature \cite{thalmann_crowd_2013}, and rigid body physics. In addition the "Alice" program, which is used to simulate the zombie crowds, uses a microscopic based model where each agent is simulated by given rules and attributes, which we already know from a lot of papers \cite{wired_worldwarz_doku}. 
 
 %An other commercial software for CGI crowds is "Golaem" \cite{golaem_website}. This software can be purchased for individual projects and is therefore used for movies with a smaller budget, commercials or other short CGI clips in need for crowds, that can't afford to develop their own software tool, but it is also used for big budget productions for example in "Game of Thrones" \cite{golaem_got_vid}
 
@@ -141,12 +141,12 @@ Many approaches for real time simulation are using the common LOD (level of deta
 Another example of what can be done with various optimization is "Ultimate Epic Battle Simulator" \cite{ultimeEpicBattleSim_video} , which is basically a big real-time crowd simulation sandbox. They manage to simulate path tracing on up to ten thousands of individual soldiers in real time. Sadly as it is proprietary there is not much detailed information, besides that they are using a highly optimized version of A* path tracing \label{term:A*Usage} with a shared memory, publicly available. 
 This example shows that crowd simulation at games can significantly impact gameplay, but requires a lot of optimization for a reasonable performance.
 
-\subsection{Simulation Models}
+\subsection{Simulation models}
 \label{chap:simulationModels}
 To simulate realistic crowd behavior a model is needed that specifies how the crowd reacts in each simulation step. The used models can be classified in roughly two groups: macroscopic and microscopic models. The difference between the two is how they see an agent in a crowd. An \textbf{agent} is a single actor in a crowd simulation that can move and act independently from other agents. This can be a human in a crowd of people but also a car in a traffic simulation. However, on some applications and papers especially those who handle real time simulations, agents are grouped to reduce the simulation cost and only rendered as multiple agents / persons.
 
 \subsubsection{\textbf{Macroscopic models}}
-These types of models try to simulate the crowd as a whole unit. They are often used in a real-time scenario because the number of individual agents in the crowd does not highly affect performance in the simulation. In some papers they are also referred as "continuum-based" \cite{xu_crowd_2014}. The goal here is that the crowd as a whole reacts realistically. These simulations can be compared to gas or fluid simulations because not each particle, or in our case each agent, is simulated. Moreover a common path for the fluid or whole crowd is simulated. An example are the pedestrian and crowd simulation papers from Hudges \cite{hughes_continuum_2002} \cite{hughes_flow_2003}
+These types of models try to simulate the crowd as a whole unit. They are often used in a real-time scenario because the number of individual agents in the crowd does not highly affect performance in the simulation. In some papers they are also referred as "continuum-based" \cite{xu_crowd_2014}. The goal here is that the crowd as a whole reacts realistically. These simulations can be compared to gas or fluid simulations because not each particle, or in our case each agent, is simulated. Moreover a common path for the fluid or whole crowd is simulated. An example are the papers from Hudges \shortcite{hughes_continuum_2002} \shortcite{hughes_flow_2003}. Here the authors examine the flow of pedestrians, techniques to understand the motion of large crowds, the connection between the psychological state and the path of the crowd and the difference between fluid simulation and crowd simulation.     
 
 \subsubsection{\textbf{Microscopic models}} \label{def:microscopic models}
 On the other hand microscopic models, also referred as "agent-based"\cite{xu_crowd_2014}, try to simulate each single agent. The resulting simulation often brings better results than a simulation with a macroscopic model but it also costs more performance, so it is not suitable for simulating large crowds in real time. Most approaches define rules for each agent on how to react to the environment and different scenarios. There is a lot of different papers and approaches to which rules and attributes provide what results. A common used approach are force-based simulations, see Section \ref{chapter:elementaryPapers} for examples.
@@ -188,7 +188,7 @@ In their model they have a "panic parameter" \label{term:panicParameter} which a
 
 This paper is often cited, one example is \cite{braun_simulating_2005}\label{exp:braun2005}. Here the authors extend the research by adding a Finite State Machine to the simulation which allows them to control complex environments and hazard events in more detail. In Addition the authors also provide a mechanism to model the communication between individual agents. Helbing's work is also often compared to other simulation models, for example in the paper \cite{zheng_modeling_2009}. This paper also states that the social force model, for specific scenarios like finding a way throw traffic flow, is oversimplified in relation to the underlying assumptions to the model.
 
-\section{Research Areas}
+\section{Research areas}
 \label{chap:researchAreas}
 
 The rough separation of the research field described in \ref{chap:key_areas} can be extended for more detail.
@@ -229,8 +229,7 @@ In some cases there are already models available to use. Of course these can als
 An optimum would be to generate a large amount of diverse looking agents with as little information as possible, this idea being the goal for this approach. However, it is rather hard to create models that can compete against models from other approaches. Early research done by Sheldon \shortcite{sheldon_varieties_1940} investigate the "somatotype model". Later on it was enhanced by \cite{carter_somatotyping_1990}, the approach uses multiple extreme somatotypes and tries to generate models in between them. The demand for efficient result analysis to evaluate the generated models is another challenge. This is done with microscopic analysis, for testing the appearance against the input data, and macroscopic analysis for testing the diversity of generated models \cite{thalmann_crowd_2013}. 
 
 \subsubsection{Vary model for large crowds} 
-One problem with all approaches is that they only work for a limited amount of agents effectively. To prevent the use of nearly similar looking agents and to reduce the memory needed for storing and later also rendering the agents it is possible to vary the generated models. This can be done on multiple levels like skeleton, meshes, textures and animations. 
-\cite{thalmann_crowd_2013}
+One problem with all approaches is that they only work for a limited amount of agents effectively. To prevent the use of nearly similar looking agents and to reduce the memory needed for storing and later also rendering the agents it is possible to vary the generated models. This can be done on multiple levels like skeleton, meshes, textures and animations \cite{thalmann_crowd_2013}.
 
 \subsection{Crowd animation}
 
