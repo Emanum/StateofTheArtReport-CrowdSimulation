@@ -214,22 +214,20 @@ For a realistic looking crowd there are often more animations than the core walk
 Here the authors use previous research on different attention models, for a general use-case like \cite{peters_model_2005}, to integrate the knowledge into a crowd simulation. They do this by defining interest points, for example shopping windows, in the scene and adapting the agents motion and gaze to it. 
 
 \subsection{Generation of individual agents}
-To simulate a realistic crowd it is necessary to have different 3D models to display in our crowd. The goal in this area is to develop methods which reduce the cost of time to create such models. There are multiple approaches over which we want to give a quick overview. Which approach to choose depends on multiple aspects like quality needed, amount of time that can be invested, what type of agents to produce (persons, cars, ...) and many more. 
-\subsubsection{Manually model agents}
-The most basic way is of course to model each agent manually. The challenge is to also keep the polygon count low as this is required later on when we want to render the crowd. Techniques like subdivision surfaces and patch modeling, used by \cite{osullivan_levels_2002}, are used to achieve that.
+To simulate a realistic crowd it is necessary to have different 3D models to display in our crowd. The goal in this area is to develop methods which reduce the cost of time to create such models. 
+%There are multiple approaches, which to choose depends on multiple aspects like quality needed, amount of time that can be invested, what type of agents to produce (persons, cars, ...) and many more.
 
-\subsubsection{Reconstruct from existing data}
-Another approach is to use already existing data  from agents we want to simulate to generate our models. Dekker \shortcite{dekker_3d_2000} presented an approach which uses 3D range data. Multiple Images from different views were used by Kakadiaris and Metaxas \shortcite{kakadiaris_three-dimensional_1998}. And Plänkers \shortcite{plankers_automated_1999} used multiple video videos as input.
-Hole filling, noise reduction and skeleton hierarchy approximation are some challenges this approach faces in the process of finalizing the models. 
+%\subsubsection{Manually model agents}
+The most basic way would be to model each agent manually. O’Sullivan et al. \shortcite{osullivan_levels_2002} use techniques like subdivision surfaces and patch modeling. This helps them to keep the polygon count low for the rendering part.
+%\subsubsection{Reconstruct from existing data}
+There are multiple approaches which make use of existing data to generate new human models. Dekker \shortcite{dekker_3d_2000} presented an approach which use 3D range data. Multiple Images from different views were used by Kakadiaris and Metaxas \shortcite{kakadiaris_three-dimensional_1998}. And Plänkers \shortcite{plankers_automated_1999} used multiple video videos as input.
+%\subsubsection{Interpolate existing models}
+In some cases there are already models available to use. We can use these models to interpolate between multiple models to create new ones. Jack is a software presented by Azuola et al. \shortcite{azuola_building_1994} which allows users to scale their models individually.
+%\subsubsection{Auto generated models from population}
+An optimum would be to generate a large amount of diverse looking agents with as little information as possible. However, it is rather hard to create models that can compete against models from other approaches. Early research done by Sheldon \shortcite{sheldon_varieties_1940} investigate the "somatotype model". Later on it was enhanced by Carter et al. \shortcite{carter_somatotyping_1990}, the approach uses multiple extreme somatotypes and tries to generate models in between them.
 
-\subsubsection{Interpolate existing models}
-In some cases there are already models available to use. Of course these can also come from the approaches mentioned before. We can use these models to interpolate between multiple models to create new ones. Jack is a software presented by a paper which allows users to scale their models individually \cite{azuola_building_1994}.
-
-\subsubsection{Auto generated models from population}
-An optimum would be to generate a large amount of diverse looking agents with as little information as possible, this idea being the goal for this approach. However, it is rather hard to create models that can compete against models from other approaches. Early research done by Sheldon \shortcite{sheldon_varieties_1940} investigate the "somatotype model". Later on it was enhanced by \cite{carter_somatotyping_1990}, the approach uses multiple extreme somatotypes and tries to generate models in between them. The demand for efficient result analysis to evaluate the generated models is another challenge. This is done with microscopic analysis, for testing the appearance against the input data, and macroscopic analysis for testing the diversity of generated models \cite{thalmann_crowd_2013}. 
-
-\subsubsection{Vary model for large crowds} 
-One problem with all approaches is that they only work for a limited amount of agents effectively. To prevent the use of nearly similar looking agents and to reduce the memory needed for storing and later also rendering the agents it is possible to vary the generated models. This can be done on multiple levels like skeleton, meshes, textures and animations \cite{thalmann_crowd_2013}.
+%\subsubsection{Vary model for large crowds} 
+%One problem with all approaches is that they only work for a limited amount of agents effectively. To prevent the use of nearly similar looking agents and to reduce the memory needed for storing and later also rendering the agents it is possible to vary the generated models. This can be done on multiple levels like skeleton, meshes, textures and animations \cite{thalmann_crowd_2013}.
 
 \subsection{Crowd animation}
 
