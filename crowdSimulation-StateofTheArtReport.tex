@@ -52,7 +52,7 @@
 
 \teaser{
  \includegraphics[width=\textwidth]{images/bannerImg.png}
- \caption{Example crowd simulations. Left: collision avoidance model \protect\cite{ondrej_synthetic-vision_2010}, middle-left: commercial application MassMotion \protect\cite{mediaworks_pedestrian_2020}, middle-right: crowd behaviour model \protect\cite{pelechano_controlling_2007}, right: bird flock animation, one of the first papers on the crowd simulation field \protect\cite{reynolds_flocks_1987}}.
+ \caption{Example crowd simulations. Left: collision avoidance model \protect\cite{ondrej_synthetic-vision_2010}, middle-left: commercial application MassMotion \protect\cite{mediaworks_pedestrian_2020}, middle-right: crowd behaviour model \protect\cite{pelechano_controlling_2007}, right: bird flock animation, one of the first papers on the crowd simulation field \protect\cite{reynolds_flocks_1987}.}
  \label{fig:teaser}
 }
 
@@ -156,7 +156,7 @@ On the other hand microscopic models, also referred as "agent-based"\cite{xu_cro
 In the following section i want to sum up some often cited and elementary papers, which build the base for the crowd simulation field.
 \subsection{Beginnings of crowd simulation research}
 
-Reynolds \shortcite{reynolds_flocks_1987} wrote one of the most famous, first published papers for the crowd simulation field . The paper describes an approach for modeling a simulation of a flock of birds and other crowds. When it was written the common way to simulate a crowd was to script the path of each agent individually. Reynolds defined some key concepts and keywords for the crowd simulation field for example he introduced the idea of what later would become known as agend-based or microscopic simulation: The authors figured out that, the movement of the crowd (flock) is just the aggregation of the movement from its individual agents (birds), so to simulate a complete crowd we have to simulate each individual agent.
+Reynolds \shortcite{reynolds_flocks_1987} wrote one of the most famous, first published papers for the crowd simulation field. The paper describes an approach for modeling a simulation of a flock of birds and other crowds. When it was written the common way to simulate a crowd was to script the path of each agent individually. Reynolds defined some key concepts and keywords for the crowd simulation field for example he introduced the idea of what later would become known as agend-based or microscopic simulation: The authors figured out that, the movement of the crowd (flock) is just the aggregation of the movement from its individual agents (birds), so to simulate a complete crowd we have to simulate each individual agent.
 The term \textbf{agent} or \textbf{actor} is used for abstracting a state, process and procedure into one unit, this concept is used in most microscopic simulation approaches today. The difference between the author's simulation and a common particle system is that, the agents have a more complex state and behavior that a simple particle.
 The authors also compare their approach to a particle system for simulating dynamic "fuzzy objects", but the differences in their approach is that each particle/bird has a complex geometrical state (orientation; animation for example flight banking) and that a bird flock is more complex to describe than other particle systems like for example a fire. In addition basic particle systems do not simulate the interaction between the particles.
 
@@ -220,7 +220,7 @@ To simulate a realistic crowd it is necessary to have different 3D models to dis
 %\subsubsection{Manually model agents}
 The most basic way would be to model each agent manually. O’Sullivan et al. \shortcite{osullivan_levels_2002} use techniques like subdivision surfaces and patch modeling. This helps them to keep the polygon count low for the rendering part.
 %\subsubsection{Reconstruct from existing data}
-There are multiple approaches which make use of existing data to generate new human models. Dekker \shortcite{dekker_3d_2000} presented an approach which use 3D range data. Multiple Images from different views were used by Kakadiaris and Metaxas \shortcite{kakadiaris_three-dimensional_1998}. And Plänkers \shortcite{plankers_automated_1999} used multiple video videos as input.
+There are multiple approaches which make use of existing data to generate new human models. Dekker \shortcite{dekker_3d_2000} presented an approach which use 3D range data. Multiple Images from different views were used by Kakadiaris and Metaxas \shortcite{kakadiaris_three-dimensional_1998}. Lastly Plänkers \shortcite{plankers_automated_1999} used multiple video videos as input.
 %\subsubsection{Interpolate existing models}
 In some cases there are already models available to use. We can use these models to interpolate between multiple models to create new ones. Jack is a software presented by Azuola et al. \shortcite{azuola_building_1994} which allows users to scale their models individually.
 %\subsubsection{Auto generated models from population}
@@ -251,7 +251,7 @@ Additionally, crowd rendering can also benefit from other performance techniques
 
 \subsection{Generation of environments for crowds}
 
-Here the research is focused on producing areas for the crowd simulation. As most applications simulate people crowds around cities the automatic construction of urban areas is a big research topic. The research done here ranges from terrain modeling, plants-, lakes- and building placements over building floor plans and streetsi \cite{berg_computational_2000}. It is important to remember that the generated environment also impacts our whole simulation (path planning, collision avoidance, behaviour model, ...). 
+Here the research is focused on producing areas for the crowd simulation. As most applications simulate people crowds around cities the automatic construction of urban areas is a big research topic. The research done here ranges from terrain modeling, placement of plants, lakes and buildings over building floor plans and streets \cite{berg_computational_2000}. It is important to remember that the generated environment also impacts our whole simulation (path planning, collision avoidance, behaviour model, ...). 
 As modelling these often large areas manually requires a lot of time, the need for automatic or semiautomatic algorithms is big. A rough separation of these methods are reconstruction based and parametric based approaches. 
 Aerial photos, 2D maps and laser profiler data is used to reconstruct real world environments. These applications are usually applied for historical cities. 
 Meanwhile parametric methods do not focus on the accurate representation of already existing areas, instead they want to provide cities for specific use cases where the application can decide on the parameters. These later can be filled with the crowd. Another important aspect is that the environment has to be interactive, for example  crowd agents should be able to enter buildings
